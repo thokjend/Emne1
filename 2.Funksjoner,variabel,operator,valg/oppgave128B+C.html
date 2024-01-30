@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 128B</title>
+</head>
+
+<body>
+
+    <input type="number" id="guessfield">
+    <br>
+    <button onclick="guessSecretNumber()" id="submitbutton">Guess</button>
+    <br>
+    <div id="guessArea"></div>
+
+    <script>
+        let secretNumber = getRandomNumber(1, 100)
+        let guesses = 0;
+
+        function getRandomNumber(min, max) {
+            return min + Math.floor(Math.random() * (max - min + 1));
+        }
+
+        function guessSecretNumber() {
+            let guess = document.getElementById('guessfield').valueAsNumber
+            guesses ++
+            if (guess == secretNumber) {
+                document.getElementById('guessArea').innerHTML = /*HTML*/ `You guessed the right number with ${guesses} guesses`
+            }
+            else if (guess < secretNumber) {
+                document.getElementById('guessArea').innerHTML = /*HTML*/ `Too small, try again. Guesses: ${guesses}`
+            }
+            else if (guess > secretNumber) {
+                document.getElementById('guessArea').innerHTML = /*HTML*/ `Too large, try again. Guesses: ${guesses}`
+            }
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flytte rundt på en logo</title>
+    <style>
+        div.square {
+            border: 1px solid gray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        div.board {
+            display: grid;
+            grid-template-columns: repeat(2, 250px);
+            grid-template-rows: repeat(2, 120px);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>DRY = Don't Repeat Yourself</h1>
+
+    <div id="app">
+    </div>
+
+    <script>
+        showLogoToTheRightAndUp();
+        function showLogoToTheRightAndUp() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+                <div class="board">
+                    <div class="square"></div>
+                    <div class="square">
+                        <img width="200" src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png" />
+                    </div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                </div>
+                <div>
+                    <button>▲</button>
+                    <br/>
+                    <button onclick="showLogoToTheLeftAndUp()">◀</button><button>▶</button>
+                    <br/>
+                    <button onclick="showLogoToTheRightAndDown()">▼</button>
+                </div>        
+            `;
+
+        }
+
+        function showLogoToTheLeftAndUp() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+                <div class="board">
+                    <div class="square">
+                        <img width="200" src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png" />
+                    </div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                </div>
+                <div>
+                    <button>▲</button>
+                    <br/>
+                    <button onclick="showLogoToTheLeftAndUp()">◀</button><button onclick="showLogoToTheRightAndUp()">▶</button>
+                    <br/>
+                    <button onclick="showLogoToTheLeftAndDown()">▼</button>
+                </div>        
+            `;
+
+        }
+
+        function showLogoToTheRightAndDown() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+                <div class="board">
+                    <div class="square">
+                        
+                    </div>
+                    <div class="square"></div>
+                    <div class="square"></div>
+                    <div class="square">
+                        <img width="200" src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png" />
+                    </div>
+                </div>
+                <div>
+                    <button onclick="showLogoToTheRightAndUp()">▲</button>
+                    <br/>
+                    <button onclick="showLogoToTheLeftAndDown()">◀</button><button>▶</button>
+                    <br/>
+                    <button>▼</button>
+                </div>        
+            `;
+
+        }
+
+        function showLogoToTheLeftAndDown() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+                <div class="board">
+                    <div class="square">
+                        
+                    </div>
+                    <div class="square"></div>
+                    <div class="square">
+                        <img width="200" src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png" />
+                    </div>
+                    <div class="square">
+                        
+                    </div>
+                </div>
+                <div>
+                    <button onclick="showLogoToTheLeftAndUp()">▲</button>
+                    <br/>
+                    <button>◀</button><button onclick="showLogoToTheRightAndDown()">▶</button>
+                    <br/>
+                    <button>▼</button>
+                </div>        
+            `;
+
+        }
+    </script>
+</body>
+
+</html>

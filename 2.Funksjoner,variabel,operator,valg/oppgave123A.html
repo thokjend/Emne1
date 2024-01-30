@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 123A</title>
+</head>
+
+<body>
+    <div id="myId">
+    </div>
+
+
+    <script>
+        drawField('fname', 'First name', 'text')
+        drawField('lname', 'Last name', 'text')
+        drawField('zero2hundred', 'En til hundre', 'range')
+        drawField('number', 'Skriv inn et tall', 'number')
+        drawField('html', 'HTML', 'radio', 'fav_language')
+        drawField('css', 'CSS', 'radio', 'fav_language')
+        drawField('javascript', 'JavaScript', 'radio', 'fav_language')
+        drawField('vehicle1', 'I have a bike', 'checkbox')
+        drawField('vehicle2', 'I have a car', 'checkbox')
+        drawField('vehicle3', 'I have a boat', 'checkbox')
+
+        function drawField(id, label, type, radioGroupName) {
+            let minMaxStep = '';
+            let labelTag = `<label for="${id}">${label}:</label>`;
+            let breakTag = '<br/>';
+            let fieldTag = `<input type="${type}" ${minMaxStep}  id="${id}">`;
+            if (type == 'range') {
+                minMaxStep = 'min="1" max="100" step="1"'
+            }
+            html = labelTag + breakTag + fieldTag + breakTag
+            if (type == 'radio' || type =='checkbox'){
+                html = /*HTML*/`
+                <input type="${type}" name="${radioGroupName}"  id="${id}">
+                <label for="${id}">${label}:</label>
+                <br/>`
+            }
+            document.getElementById('myId').innerHTML += html
+            
+        }
+    </script>
+</body>
+
+</html>

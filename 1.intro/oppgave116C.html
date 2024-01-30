@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 116C</title>
+</head>
+<body>
+
+    <div id="myId"></div>
+
+    <script>
+        ut()
+
+    function ut(){
+        document.getElementById("myId").innerHTML = /*HTML*/
+        `
+        <div id="myId">Du er utenfor en leilighet</div>
+        <button onclick="gang()">Gå inn</button>
+        
+        `
+    }
+
+    function gang(){
+        document.getElementById("myId").innerHTML = /*HTML*/
+        `
+        Du er i gangen<br/>
+        <button onclick="ut()">Gå ut</button><br/>
+        <button onclick="stue()">Gå inn i stua</button><br/>
+        <button onclick="bad()">Gå inn på badet</button><br/>
+        <button onclick="kjøkken()">Gå inn på kjøkkenet</button>
+        `
+    }
+    function stue(){
+        document.getElementById("myId").innerHTML = /*HTML*/
+        `
+        Du er i stua<br/>
+        <button onclick="gang()">Gå til gangen</button><br/>
+        <button onclick="kjøkken()">Gå inn på kjøkkenet</button>
+        `
+    }
+    function bad(){
+        document.getElementById("myId").innerHTML = /*HTML*/
+        `
+        Du er på badet<br/>
+        <button onclick="gang()">Gå til gangen</button>
+        `
+    }
+    function kjøkken(){
+        document.getElementById("myId").innerHTML = /*HTML*/
+        `
+        Du er på kjøkkenet<br/>
+        <button onclick="gang()">Gå til gangen</button><br/>
+        <button onclick="stue()">Gå inn i stua</button>
+        `
+    }
+    
+        
+
+    </script>
+</body>
+</html>

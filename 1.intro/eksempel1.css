@@ -1,0 +1,67 @@
+body{
+    margin-left: 20px;
+}
+
+.card{
+    width: 500px;
+    background-color: lightgray;
+    border: 1px solid darkgray;
+    margin: 10px;
+}
+
+.innerCard{
+    padding: 10px;
+}
+
+.header{
+    color: white;
+    text-align: center;
+    font-size: x-large;
+    padding: 1% 0;
+    border: 1px solid gray;
+    user-select: none;
+}
+
+.bodyPart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.green{
+    background-color: green;
+}
+
+.blue{
+    background-color: blue;
+}
+
+.red{
+    background-color: red;
+}
+
+.yellow{
+    background-color: rgb(226, 176, 38);
+}
+
+.dark{
+    background-color: black;
+}
+
+.horisontal {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+.vertikal {
+    display: flex;
+    flex-direction: column;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 520px);
+    width: auto;
+}
+

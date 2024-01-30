@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 124F</title>
+</head>
+
+<body>
+
+
+    <script>
+        createGrid(3, 2,
+            createDiv('Kol 1 rad 1')
+            + createDiv('Kol 2 rad 1')
+            + createDiv('Kol 3 rad 1')
+            + createDiv('Kol 1 rad 2')
+            + createDiv('Kol 2 rad 2')
+            + createDiv('Kol 3 rad 2')
+        )
+
+        function createGrid(columnCount, rowCount, innerHTML) {
+            return document.body.innerHTML = /*HTML*/`
+            <div style="display: grid; grid-template-columns: repeat(${columnCount}, auto);grid-template-rows: repeat(${rowCount}, auto)">
+                ${innerHTML}
+            </div>
+            `
+        }
+        function createDiv(text) {
+            return /*HTML*/ `<div>${text}</div>`
+        }
+
+    </script>
+</body>
+
+</html>

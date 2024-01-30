@@ -1,0 +1,80 @@
+<html>
+
+<head>
+    <style>
+        div.trafficLight {
+            width: 3rem;
+            height: 10rem;
+            display: flex;
+            flex-direction: column;
+            background-color: black;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        div.light {
+            background-color: red;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container"></div>
+
+    <script>
+        light()
+        function light() {
+            document.getElementById('container').innerHTML = /*HTML*/
+                `
+            <div id="container" onclick="light2()" class="trafficLight">
+                <div id="light1" class="light" style="background-color: red;"></div>
+                <div id="light2" class="light" style="background-color: gray;"></div>
+                <div id="light3" class="light" style="background-color: gray;"></div>
+            </div>
+            `
+        }
+
+        function light2() {
+            document.getElementById('container').innerHTML = /*HTML*/
+                `
+            <div id="container" onclick="light3()" class="trafficLight">
+                <div id="light1" class="light" style="background-color: red;"></div>
+                <div id="light2" class="light" style="background-color: yellow;"></div>
+                <div id="light3" class="light" style="background-color: gray;"></div>
+            </div>
+            `
+        }
+
+        function light3() {
+            document.getElementById('container').innerHTML = /*HTML*/
+                `
+            <div id="container" onclick="light4()" class="trafficLight">
+                <div id="light1" class="light" style="background-color: gray;"></div>
+                <div id="light2" class="light" style="background-color: gray;"></div>
+                <div id="light3" class="light" style="background-color: green;"></div>
+            </div>
+            `
+        }
+
+        function light4() {
+            document.getElementById('container').innerHTML = /*HTML*/
+                `
+            <div id="container" onclick="light()" class="trafficLight">
+                <div id="light1" class="light" style="background-color: gray;"></div>
+                <div id="light2" class="light" style="background-color: yellow;"></div>
+                <div id="light3" class="light" style="background-color: gray;"></div>
+            </div>
+            `
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

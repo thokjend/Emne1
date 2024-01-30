@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 124D</title>
+    <style>
+        #myId{
+        font-size: 5em;
+        text-align: center;
+        padding-top: 2em;
+    }
+   
+    </style>
+    
+</head>
+
+<body>
+
+    <button onclick="convertTemperature('f')">F</button>
+    <button onclick="convertTemperature('c')">C</button>
+    <div id="myId">
+    </div>
+
+    <script>
+        function convertTemperature(unit) {
+            if (unit == 'c') {
+                convertCelsiusToFahrenheit(0);
+            }
+            else if (unit == 'f') {
+                convertFahrenheitToCelsius(0);
+            
+            }
+        }
+        function convertCelsiusToFahrenheit(celcius) {
+            fahrenheit = celcius * 9 / 5 + 32
+            return document.getElementById('myId').innerHTML = `${celcius}°C = ${fahrenheit}°F`
+        }
+
+        function convertFahrenheitToCelsius(fahrenheit) {
+            celcius = ((fahrenheit - 32) * 5 / 9).toFixed(2)
+            return document.getElementById('myId').innerHTML = `${fahrenheit}°F = ${celcius}°C`
+        }
+    </script>
+</body>
+
+</html>

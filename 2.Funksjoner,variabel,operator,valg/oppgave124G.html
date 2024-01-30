@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 124G</title>
+</head>
+
+<body>
+
+    <script>
+        createNumberSelector(1,2,3,'Day')
+        createNumberSelector(1,2,3,'Month')
+        createNumberSelector(1,2,3,'Year')
+
+        function createNumberSelector(number, min, max, name) {
+            return document.body.innerHTML += /*HTML*/`
+                <div id="${name}Main" style="display: flex;align-items: center;">
+                    <div id="${name}" style="font-size: 300%;">${name}:${number}</div>
+                    <div style="display: flex; flex-direction: column;align-items: flex-start;">
+                        <button onclick="select${name}()">▲</button>
+                        <button onclick="select${name}()" disabled>▼</button>
+                    </div>
+                </div>
+                `
+        }
+    
+
+    </script>
+</body>
+
+</html>

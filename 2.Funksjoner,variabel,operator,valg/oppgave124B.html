@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 124B</title>
+    <style>
+        #myId{
+            font-size: 5em;
+            text-align: center;
+            padding-top: 2em;
+        }
+    </style>
+</head>
+<body>
+    <div id="myId">
+
+    </div>
+    <script>
+        convertCelsiusToFahrenheit(0)
+        function convertCelsiusToFahrenheit(celcius){
+            fahrenheit = celcius * 9/5 + 32
+            return document.getElementById('myId').innerHTML = `${celcius}°C = ${fahrenheit}°F`
+        }
+    </script>
+</body>
+</html>

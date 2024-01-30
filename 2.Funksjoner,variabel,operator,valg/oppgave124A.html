@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 124A</title>
+    <style>
+        #product{
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="minId">
+
+    </div>
+
+    <script>
+        store('Tastatur', '400', '4')
+        store('mus', '200', '2')
+        store('pc', '15000', '2')
+        
+
+
+        function store(product, price, amount) {
+            return document.getElementById('minId').innerHTML += `
+            <div id="product">
+            Product: ${product}<br/>
+            Price: ${price}<br/> 
+            Amount: ${amount}<br/>
+            Total amount: ${amount * price}
+            </div><br/>
+            `
+        }
+    </script>
+
+</body>
+
+</html>

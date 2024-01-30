@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teamoppgave1</title>
+    <style>
+        #board {
+            display: grid;
+            grid-template-columns: repeat(4, 200px);
+            grid-template-rows: repeat(4, 200px);
+        }
+
+        #board>div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid gray;
+            background-color: darkgray;
+        }
+
+        img {
+            width: 195px;
+            height: 195px;
+            object-fit: cover;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="board">
+        <div class="dog" onclick="show('dog', this.id)" id="dog1"></div>
+        <div class="frog" onclick="show('frog', this.id)" id="frog1"></div>
+        <div class="horse" onclick="show('horse', this.id)" id="horse1"></div>
+        <div class="chicken" onclick="show('chicken', this.id)" id="chicken1"></div>
+        <div class="spider" onclick="show('spider', this.id)" id="spider1"></div>
+        <div class="frog" onclick="show('frog', this.id)" id="frog2"></div>
+        <div class="spider" onclick="show('spider', this.id)" id="spider2"></div>
+        <div class="tiger" onclick="show('tiger', this.id)" id="tiger1"></div>
+        <div class="chicken" onclick="show('chicken', this.id)" id="chicken2"></div>
+        <div class="dog" onclick="show('dog', this.id)" id="dog2"></div>
+        <div class="elephant" onclick="show('elephant', this.id)" id="elephant1"></div>
+        <div class="cat" onclick="show('cat', this.id)" id="cat1"></div>
+        <div class="cat" onclick="show('cat', this.id)" id="cat2"></div>
+        <div class="elephant" onclick="show('elephant', this.id)" id="elephant2"></div>
+        <div class="horse" onclick="show('horse', this.id)" id="horse2"></div>
+        <div class="tiger" onclick="show('tiger', this.id)" id="tiger2"></div>
+    </div>
+
+
+    <script>
+        function show(animalGroup, imgId) {
+            let id = document.getElementById(imgId);
+            let myImg = id.querySelector('img');
+            if(myImg){
+                myImg.style.display = myImg.style.display === 'none' ? 'block' : 'none';
+            }
+            else{
+                id.innerHTML = `<img "style="display:block" src="/img/${animalGroup}.jpg">`
+            }
+            
+        }
+
+    </script>
+
+</body>
+
+</html>

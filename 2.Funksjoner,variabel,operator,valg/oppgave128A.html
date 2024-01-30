@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 128A</title>
+</head>
+
+<body>
+    <h1>Score: <label id="myId" for="">0</label></h1>
+    <br>
+    <button onclick="increase(counter)"> Increase </button>
+    <button onclick="upgrade(10)"> Upgrade </button>
+
+
+    <script>
+        let counter = 1
+        let score = 0
+        function increase(counter) {
+            score += counter
+            document.getElementById('myId').innerHTML = score
+        }
+
+        function upgrade(value) {
+            if (score >= 10) {
+                score -= value
+                counter ++
+                document.getElementById('myId').innerHTML = score
+            }
+        }
+
+
+    </script>
+
+</body>
+
+</html>

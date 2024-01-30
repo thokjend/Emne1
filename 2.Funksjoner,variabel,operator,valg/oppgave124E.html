@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 124E</title>
+</head>
+
+<body>
+    <div id="div">
+
+    </div>
+
+    <script>
+        createDiv('blue', 'white', 'Hei')
+        createDiv('green', 'black', 'Hei på deg')
+        createDiv('red', 'black', 'Hei Hei Hei')
+        function createDiv(backgroundColor, foregroundColor, text){
+            return /*HTML*/ document.getElementById('div').innerHTML +=`
+             <div style="background-color: ${backgroundColor}; ${foregroundColor}: white">${text}</div> ` 
+        }
+
+    </script>
+</body>
+
+</html>

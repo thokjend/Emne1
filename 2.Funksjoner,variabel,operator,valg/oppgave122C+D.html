@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 122C+D</title>
+</head>
+
+<body>
+    <div id="myId">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore qui necessitatibus voluptatem soluta magnam
+        perspiciatis delectus quisquam blanditiis, atque nostrum ullam exercitationem dolorem, accusantium rem ab
+        pariatur libero velit? Voluptatem?
+    </div>
+
+    <button onclick="size('small')">size1</button>
+    <button onclick="size('smaller')">size2</button>
+    <button onclick="size('medium')">size3</button>
+    <button onclick="size('large')">size4</button>
+    <button onclick="size('larger')">size5</button>
+    <button onclick="size('5em')">size6</button>
+
+    <script>
+
+        function size(size) {
+            document.getElementById('myId').innerHTML =
+                `
+                <div style="font-size: ${size};">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore qui necessitatibus voluptatem soluta magnam
+                    perspiciatis delectus quisquam blanditiis, atque nostrum ullam exercitationem dolorem, accusantium rem ab
+                    pariatur libero velit? Voluptatem?
+                </div>
+                `;
+            //document.getElementById('myId').style.fontSize = `${size}`;
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 122E</title>
+</head>
+
+<body>
+    <div id="myId">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore qui necessitatibus voluptatem soluta magnam
+        perspiciatis delectus quisquam blanditiis, atque nostrum ullam exercitationem dolorem, accusantium rem ab
+        pariatur libero velit? Voluptatem?
+    </div>
+
+    <button onclick="size('small')">size1</button>
+    <button onclick="size('smaller')">size2</button>
+    <button onclick="size('medium')">size3</button>
+    <button onclick="size('large')">size4</button>
+    <button onclick="size('larger')">size5</button>
+    <button onclick="size('5em')">size6</button>
+    <br>
+    <button onclick="changeColor(5,0,0)">Red increase</button>
+    <button onclick="changeColor(-5,0,0)">Red decrease</button>
+    <br>
+    <button onclick="changeColor(0,5,0)">Green increase</button>
+    <button onclick="changeColor(0,-5,0)">Green decrease</button>
+    <br>
+    <button onclick="changeColor(0,0,5)">Blue increase</button>
+    <button onclick="changeColor(0,0,-5)">Blue decrease</button>
+
+    <script>
+
+        let redValue = 125;
+        let greenValue = 125;
+        let blueValue = 125;    
+
+        function changeColor(redChange, greenChange, blueChange) {
+            redValue += redChange;
+            greenValue += greenChange;
+            blueValue += blueChange;
+            document.getElementById('myId').style.backgroundColor = `rgb(${redValue},${greenValue},${blueValue})`;
+        }
+
+        function size(size) {
+            document.getElementById('myId').innerHTML =
+                `
+                <div style="font-size: ${size};">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore qui necessitatibus voluptatem soluta magnam
+                    perspiciatis delectus quisquam blanditiis, atque nostrum ullam exercitationem dolorem, accusantium rem ab
+                    pariatur libero velit? Voluptatem?
+                </div>
+                `;
+            //document.getElementById('myId').style.fontSize = `${size}`;
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
