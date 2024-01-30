@@ -1,11 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oppgave 128E</title>
 </head>
+
 <body>
-    
+    <style>
+        #container {
+            display: grid;
+            grid-template-columns: repeat(2, 200px);
+            grid-template-rows: repeat(2, 200px);
+        }
+
+        #container>div {
+            width: 195px;
+            height: 195px;
+            background-color: gray;
+        }
+        #selectedIndex{
+            background-color: yellow;
+        }
+    </style>
+
+    <div id="container">
+    </div>
+
+    <script>
+        // Work in progress
+        let randomIndex = getRandomNumber(1, 4)
+        console.log(randomIndex)
+
+        function getRandomNumber(min, max) {
+            return min + Math.floor(Math.random() * (max - min + 1));
+        }
+        createGrid(randomIndex)
+        function createGrid(selectedIndex) {
+            if (selectedIndex == 1) {
+                document.getElementById('container').innerHTML = /*HTML*/`
+                <div id="${selectedIndex}">Test</div>
+                <div id="r1k2"></div>
+                <div id="r2k1"></div>
+                <div id="r2k2"></div>
+                `
+            }
+        }
+
+    </script>
+
 </body>
+
 </html>
