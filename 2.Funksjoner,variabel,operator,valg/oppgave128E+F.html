@@ -41,12 +41,11 @@
             console.log(elapsedTime);
         }
 
-
-
         let randomIndex = getRandomNumber(1, 4)
 
         function getRandomNumber(min, max) {
             return min + Math.floor(Math.random() * (max - min + 1));
+
         }
         createGrid(randomIndex)
         function createGrid(selectedIndex) {
