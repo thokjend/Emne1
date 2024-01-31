@@ -40,10 +40,33 @@
         function createGrid(selectedIndex) {
             if (selectedIndex == 1) {
                 document.getElementById('container').innerHTML = /*HTML*/`
-                <div id="${selectedIndex}">Test</div>
+                <div id="r1k1" style="background-color:yellow;"></div>
                 <div id="r1k2"></div>
                 <div id="r2k1"></div>
                 <div id="r2k2"></div>
+                `
+            }
+            else if(selectedIndex == 2){
+                document.getElementById('container').innerHTML = /*HTML*/`
+                <div id="r1k1"></div>
+                <div id="r1k2" style="background-color:yellow;"></div>
+                <div id="r2k1"></div>
+                <div id="r2k2"></div>
+                `
+            }
+            else if(selectedIndex == 3){
+                document.getElementById('container').innerHTML = /*HTML*/`
+                <div id="r1k1"></div>
+                <div id="r1k2"></div>
+                <div id="r2k1" style="background-color:yellow;"></div>
+                <div id="r2k2"></div>
+                `
+            }else{
+                document.getElementById('container').innerHTML = /*HTML*/`
+                <div id="r1k1"></div>
+                <div id="r1k2"></div>
+                <div id="r2k1"></div>
+                <div id="r2k2" style="background-color:yellow;"></div>
                 `
             }
         }
