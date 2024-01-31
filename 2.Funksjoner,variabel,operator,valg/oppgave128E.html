@@ -29,9 +29,7 @@
     </div>
 
     <script>
-        // Work in progress
         let randomIndex = getRandomNumber(1, 4)
-        console.log(randomIndex)
 
         function getRandomNumber(min, max) {
             return min + Math.floor(Math.random() * (max - min + 1));
@@ -40,7 +38,7 @@
         function createGrid(selectedIndex) {
             if (selectedIndex == 1) {
                 document.getElementById('container').innerHTML = /*HTML*/`
-                <div id="r1k1" style="background-color:yellow;"></div>
+                <div onclick="createGrid(getRandomNumber(1, 4))" id="r1k1" style="background-color:yellow;"></div>
                 <div id="r1k2"></div>
                 <div id="r2k1"></div>
                 <div id="r2k2"></div>
@@ -49,7 +47,7 @@
             else if(selectedIndex == 2){
                 document.getElementById('container').innerHTML = /*HTML*/`
                 <div id="r1k1"></div>
-                <div id="r1k2" style="background-color:yellow;"></div>
+                <div onclick="createGrid(getRandomNumber(1, 4))" id="r1k2" style="background-color:yellow;"></div>
                 <div id="r2k1"></div>
                 <div id="r2k2"></div>
                 `
@@ -58,7 +56,7 @@
                 document.getElementById('container').innerHTML = /*HTML*/`
                 <div id="r1k1"></div>
                 <div id="r1k2"></div>
-                <div id="r2k1" style="background-color:yellow;"></div>
+                <div onclick="createGrid(getRandomNumber(1, 4))" id="r2k1" style="background-color:yellow;"></div>
                 <div id="r2k2"></div>
                 `
             }else{
@@ -66,7 +64,7 @@
                 <div id="r1k1"></div>
                 <div id="r1k2"></div>
                 <div id="r2k1"></div>
-                <div id="r2k2" style="background-color:yellow;"></div>
+                <div onclick="createGrid(getRandomNumber(1, 4))" id="r2k2" style="background-color:yellow;"></div>
                 `
             }
         }
