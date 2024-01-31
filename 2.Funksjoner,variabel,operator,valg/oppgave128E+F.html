@@ -27,10 +27,12 @@
 
     <div id="container">
     </div>
+    <label id="myLabel"></label>
 
     <script>
         
         let startTime;
+        let randomIndex = getRandomNumber(1, 4)
 
         function startTimer(){
             startTime = new Date().getTime();
@@ -38,10 +40,9 @@
         function stopTimer(){
             const endTime = new Date().getTime();
             const elapsedTime = (endTime - startTime) / 1000;
-            console.log(elapsedTime);
+            document.getElementById('myLabel').innerHTML = `Reaction time: ${elapsedTime}s`
         }
 
-        let randomIndex = getRandomNumber(1, 4)
 
         function getRandomNumber(min, max) {
             return min + Math.floor(Math.random() * (max - min + 1));
@@ -52,39 +53,46 @@
             if (selectedIndex == 1) {
                 startTimer()
                 document.getElementById('container').innerHTML = /*HTML*/`
-                <div onclick="stopTimer(); createGrid(getRandomNumber(1, 4))" id="r1k1" style="background-color:yellow;"></div>
-                <div id="r1k2"></div>
-                <div id="r2k1"></div>
-                <div id="r2k2"></div>
+                <div onclick="update()"  style="background-color:yellow;"></div>
+                <div></div>
+                <div></div>
+                <div></div>
                 `
             }
             else if(selectedIndex == 2){
                 startTimer()
                 document.getElementById('container').innerHTML = /*HTML*/`
-                <div id="r1k1"></div>
-                <div onclick="stopTimer(); createGrid(getRandomNumber(1, 4))" id="r1k2" style="background-color:yellow;"></div>
-                <div id="r2k1"></div>
-                <div id="r2k2"></div>
+                <div></div>
+                <div onclick="update()" style="background-color:yellow;"></div>
+                <div></div>
+                <div></div>
                 `
             }
             else if(selectedIndex == 3){
                 startTimer()
                 document.getElementById('container').innerHTML = /*HTML*/`
-                <div id="r1k1"></div>
-                <div id="r1k2"></div>
-                <div onclick="stopTimer(); createGrid(getRandomNumber(1, 4))" id="r2k1" style="background-color:yellow;"></div>
-                <div id="r2k2"></div>
+                <div></div>
+                <div></div>
+                <div onclick="update()" style="background-color:yellow;"></div>
+                <div></div>
                 `
             }else{
                 startTimer()
                 document.getElementById('container').innerHTML = /*HTML*/`
-                <div id="r1k1"></div>
-                <div id="r1k2"></div>
-                <div id="r2k1"></div>
-                <div onclick="stopTimer(); createGrid(getRandomNumber(1, 4))" id="r2k2" style="background-color:yellow;"></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div onclick="update()" style="background-color:yellow;"></div>
                 `
             }
         }
+
+        function update(){
+            stopTimer();
+            createGrid(getRandomNumber(1, 4))
+        }
+
+
 
     </script>
 
