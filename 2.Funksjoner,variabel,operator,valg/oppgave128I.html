@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 128I</title>
+    <style>
+        div{
+            font-size: 32em;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="myId"></div>
+    
+    <script>
+
+        show()
+        function show(){
+            document.getElementById('myId').innerHTML = largestNumber(1,2,3)
+        }
+
+        function largestNumber(num1,num2,num3){
+            numberList = [num1,num2,num3]
+            let largestNum = num1;
+            for(let i = 0; i < numberList.length; i++){
+                if(numberList[i] > largestNum){
+                    largestNum = numberList[i]
+                }
+            }
+            return largestNum
+        }
+        
+
+    </script>
+</body>
+</html>
