@@ -55,37 +55,44 @@
     <div id="container">
         <input id="display" readonly>
         <div id="keys">
-            <button>+</button>
+            <button onclick="addToDisplay('+')">+</button>
             <button onclick="addToDisplay('7')">7</button>
             <button onclick="addToDisplay('8')">8</button>
             <button onclick="addToDisplay('9')">9</button>
-            <button>-</button>
+            <button onclick="addToDisplay('-')">-</button>
             <button onclick="addToDisplay('4')">4</button>
             <button onclick="addToDisplay('5')">5</button>
             <button onclick="addToDisplay('6')">6</button>
-            <button>*</button>
+            <button onclick="addToDisplay('*')">*</button>
             <button onclick="addToDisplay('1')">1</button>
             <button onclick="addToDisplay('2')">2</button>
             <button onclick="addToDisplay('3')">3</button>
-            <button>/</button>
+            <button onclick="addToDisplay('/')">/</button>
             <button onclick="addToDisplay('0')">0</button>
-            <button onclick="addToDisplay('.')">.</button>
             <button onclick="calculate()">=</button>
-            <button onclick="clear()">C</button>
+            <button onclick="clearDisplay()">C</button>
         </div>
     </div>
 
 
 
     <script>
-        // work in progress
+        const display = document.getElementById('display')
+
         function addToDisplay(number){
-            document.getElementById('display').innerHTML += number
+            display.value += number
         }
 
-        function clear(){
-            document.getElementById('display').innerHTML = '';
+        function clearDisplay(){
+            display.value = '';
         }
+
+        function calculate(){
+            display.value = eval(display.value);
+        }
+
+
+
     </script>
 
 </body>
