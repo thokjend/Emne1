@@ -44,7 +44,8 @@
             font-weight: bold;
             cursor: pointer;
         }
-        button:hover{
+
+        button:hover {
             background-color: rgb(69, 84, 148);
         }
     </style>
@@ -55,20 +56,20 @@
     <div id="container">
         <input id="display" readonly>
         <div id="keys">
-            <button onclick="addToDisplay('+')">+</button>
-            <button onclick="addToDisplay('7')">7</button>
-            <button onclick="addToDisplay('8')">8</button>
-            <button onclick="addToDisplay('9')">9</button>
-            <button onclick="addToDisplay('-')">-</button>
-            <button onclick="addToDisplay('4')">4</button>
-            <button onclick="addToDisplay('5')">5</button>
-            <button onclick="addToDisplay('6')">6</button>
-            <button onclick="addToDisplay('*')">*</button>
-            <button onclick="addToDisplay('1')">1</button>
-            <button onclick="addToDisplay('2')">2</button>
-            <button onclick="addToDisplay('3')">3</button>
-            <button onclick="addToDisplay('/')">/</button>
-            <button onclick="addToDisplay('0')">0</button>
+            <button onclick="operator('+')">+</button>
+            <button onclick="addToDisplay(7)">7</button>
+            <button onclick="addToDisplay(8)">8</button>
+            <button onclick="addToDisplay(9)">9</button>
+            <button onclick="operator('-')">-</button>
+            <button onclick="addToDisplay(4)">4</button>
+            <button onclick="addToDisplay(5)">5</button>
+            <button onclick="addToDisplay(6)">6</button>
+            <button onclick="operator('*')">*</button>
+            <button onclick="addToDisplay(1)">1</button>
+            <button onclick="addToDisplay(2)">2</button>
+            <button onclick="addToDisplay(3)">3</button>
+            <button onclick="operator('/')">/</button>
+            <button onclick="addToDisplay(0)">0</button>
             <button onclick="calculate()">=</button>
             <button onclick="clearDisplay()">C</button>
         </div>
@@ -77,18 +78,36 @@
     <script>
         const display = document.getElementById('display')
 
-        function addToDisplay(number){
+        let firstNumber;
+        let secondNumber;
+        let selectedOperation;
+        let sum;
+
+        function addToDisplay(number) {
             display.value += number
         }
 
-        function clearDisplay(){
-            display.value = '';
+        function operator(operation) {
+            selectedOperation = operation
+            firstNumber = Number(display.value)
+            display.value = null;
+        }
+        function clearDisplay() {
+            display.value = null;
         }
 
-        function calculate(){
-            display.value = eval(display.value);
+        function calculate() {
+            secondNumber = Number(display.value)
+            if (selectedOperation == '+') {
+                display.value = firstNumber + secondNumber
+            } else if (selectedOperation == '-') {
+                display.value = firstNumber - secondNumber
+            } else if (selectedOperation == '*') {
+                display.value = firstNumber * secondNumber
+            } else if (selectedOperation == '/') {
+                display.value = firstNumber / secondNumber
+            }
         }
-
 
     </script>
 
