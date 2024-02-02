@@ -81,31 +81,33 @@
         let firstNumber;
         let secondNumber;
         let selectedOperation;
+        let actionSinceLastCalc = false
 
         function addToDisplay(number) {
             display.value += number
+            actionSinceLastCalc = true;
         }
 
         function operator(operation) {
             selectedOperation = operation
             firstNumber = Number(display.value)
             display.value = null;
+            actionSinceLastCalc = true;
         }
         function clearDisplay() {
             display.value = null;
+            actionSinceLastCalc = true;
         }
 
         function calculate() {
-            secondNumber = Number(display.value)
-            if (selectedOperation == '+') {
-                display.value = firstNumber + secondNumber
-            } else if (selectedOperation == '-') {
-                display.value = firstNumber - secondNumber
-            } else if (selectedOperation == '*') {
-                display.value = firstNumber * secondNumber
-            } else if (selectedOperation == '/') {
-                display.value = firstNumber / secondNumber
+            if (!actionSinceLastCalc) {
+                let sum = Number(display.value);
+                display.value = eval(sum + selectedOperation + secondNumber);
+            } else {
+                secondNumber = Number(display.value);
+                display.value = eval(firstNumber + selectedOperation + secondNumber);
             }
+            actionSinceLastCalc = false;
         }
 
     </script>
