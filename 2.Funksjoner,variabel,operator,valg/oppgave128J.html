@@ -42,6 +42,7 @@
     <div id="container">
     </div>
 
+
     <script>
 
         show()
@@ -54,8 +55,8 @@
                 createDiv('square5', 'square2', 'square4', 'square6', 'square8', 3) +
                 createDiv('square6', 'square3', 'square5', 'square9', 'square9', '') +
                 createDiv('square7', 'square4', 'square8', 'square8', 'square8', 1) +
-                createDiv('square8', 'square5', 'square7', 'square9', 'square9', 8) +
-                createDiv('square9', 'square8', 'square6', 'square6', 'square6', 7)
+                createDiv('square8', 'square5', 'square7', 'square9', 'square9', 7) +
+                createDiv('square9', 'square8', 'square6', 'square6', 'square6', 8)
         }
 
         function createDiv(id, id1, id2, id3, id4, number) {
@@ -82,6 +83,21 @@
                 document.getElementById(input4).innerHTML = idValue.innerHTML
                 idValue.innerHTML = '';
             }
+            checkWinner()
+        }
+
+        function checkWinner(){
+            if (document.getElementById('square1').innerHTML == 1 &&
+                document.getElementById('square2').innerHTML == 2 &&
+                document.getElementById('square3').innerHTML == 3 &&
+                document.getElementById('square4').innerHTML == 4 &&
+                document.getElementById('square5').innerHTML == 5 &&
+                document.getElementById('square6').innerHTML == 6 &&
+                document.getElementById('square7').innerHTML == 7 &&
+                document.getElementById('square8').innerHTML == 8 &&
+                document.getElementById('square9').innerHTML == ''){
+                    document.getElementById('container').innerHTML = /*HTML*/ `<h1>You Won!</h1><div onclick="show()">Play again</div>`
+                }       
         }
 
     </script>
