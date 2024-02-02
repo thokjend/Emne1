@@ -1,52 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oppgave 128J</title>
 </head>
-    <style>
+<style>
+    #container {
+        display: grid;
+        max-width: 550px;
+        grid-template-columns: repeat(3, 1fr);
+        border: 5px solid black;
+        background-color: gray;
 
-        #container{
-            display: grid;
-            max-width: 550px;
-            grid-template-columns: repeat(3, 1fr);
-            border: 5px solid black;
-            background-color: gray;
-            
-        }
-        .square{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 5em;
-            border: 3px solid black;
-            border-radius: 25px;
-            gap: 10px;
-            padding: 50px;
-            background-color: white;
-            font-weight: bolder;
-        }
-        .square:hover{
-            background-color: rgb(57, 56, 60);
-            color: aliceblue;
-        }
+    }
 
-    </style>
+    #container>div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 5em;
+        border: 3px solid black;
+        border-radius: 25px;
+        gap: 10px;
+        padding: 50px;
+        background-color: white;
+        font-weight: bolder;
+        user-select: none;
+    }
+
+    #container>div:hover {
+        background-color: rgb(57, 56, 60);
+        color: aliceblue;
+        cursor: pointer;
+    }
+</style>
 
 <body>
 
     <div id="container">
-        <div class="square" id="square1">5</div>
-        <div class="square" id="square2">2</div>
-        <div class="square" id="square3"></div>
-        <div class="square" id="square4">6</div>
-        <div class="square" id="square5">3</div>
-        <div class="square" id="square6">4</div>
-        <div class="square" id="square7">1</div>
-        <div class="square" id="square7">8</div>
-        <div class="square" id="square8">7</div>
     </div>
 
+    <script>
+
+        show()
+        function show() {
+            document.getElementById('container').innerHTML =
+                createDiv('square1', 'square2', 'square4', 'square4', 'square4', 5) +
+                createDiv('square2', 'square1', 'square3', 'square5', 'square5', 2) +
+                createDiv('square3', 'square2', 'square6', 'square6', 'square6', 4) +
+                createDiv('square4', 'square1', 'square5', 'square7', 'square7', 6) +
+                createDiv('square5', 'square2', 'square4', 'square6', 'square8', 3) +
+                createDiv('square6', 'square3', 'square5', 'square9', 'square9', '') +
+                createDiv('square7', 'square4', 'square8', 'square8', 'square8', 1) +
+                createDiv('square8', 'square5', 'square7', 'square9', 'square9', 8) +
+                createDiv('square9', 'square8', 'square6', 'square6', 'square6', 7)
+        }
+
+        function createDiv(id, id1, id2, id3, id4, number) {
+            let html = `<div id="${id}" onclick="moveSquare('${id}', '${id1}', '${id2}','${id3}','${id4}')">${number}</div>`
+            return html
+        }
+
+        function moveSquare(id, input1, input2, input3, input4) {
+            const idValue = document.getElementById(id)
+            
+            if (document.getElementById(input1).innerHTML == '') {
+                document.getElementById(input1).innerHTML = idValue.innerHTML
+                idValue.innerHTML = '';
+
+            } else if (document.getElementById(input2).innerHTML == '') {
+                document.getElementById(input2).innerHTML = idValue.innerHTML
+                idValue.innerHTML = '';
+
+            } else if (document.getElementById(input3).innerHTML == '') {
+                document.getElementById(input3).innerHTML = idValue.innerHTML
+                idValue.innerHTML = '';
+
+            } else if (document.getElementById(input4).innerHTML == '') {
+                document.getElementById(input4).innerHTML = idValue.innerHTML
+                idValue.innerHTML = '';
+            }
+        }
+
+    </script>
+
+
 </body>
+
 </html>
