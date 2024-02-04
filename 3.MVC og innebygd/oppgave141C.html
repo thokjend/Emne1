@@ -3,9 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Oppgave 141C</title>
 </head>
 <body>
     
+    <div id="background">
+        <label for="">Choose background color:</label>
+        <select name="" id="">
+            <option value="" selected disabled>Color:</option>
+            <option value="">Red</option>
+            <option value="">Green</option>
+            <option value="">Blue</option>
+            <option value="">Yellow</option>
+        </select>
+    </div>
+
+    <div id="foreground">
+        <label for="">Choose foreground color:</label>
+        <select name="" id="">
+            <option value="" selected disabled>Color:</option>
+            <option value="">Red</option>
+            <option value="">Green</option>
+            <option value="">Blue</option>
+            <option value="">Yellow</option>
+        </select>
+    </div>
+
+    <div>
+        <button onclick="addDiv()">Add div</button>
+    </div>
+    
+    
+    <script>
+        //insert html
+        //Work in progress
+        let backgroundColor;
+        let foregroundColor;
+
+
+        function addDiv(){
+            document.body.innerHTML += '<div id="testDiv" style="background-color: ${backgroundColor};">hei</div>'
+        }
+
+
+    </script>
+
+
+
 </body>
 </html>
