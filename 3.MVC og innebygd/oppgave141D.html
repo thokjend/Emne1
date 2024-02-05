@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 141D</title>
+</head>
+<body>
+    
+    <div id="app">
+    </div>
+    
+
+    <script>
+        //modell
+        let firstName;
+        let email;
+
+        //view
+        show()
+        function show(){
+           document.getElementById('app').innerHTML = /*HTML*/`
+             Enter your name:
+            <input 
+                value="${firstName || ''}"
+                oninput="firstName = this.value"
+                type="text">
+            <br>
+            Enter your email:
+            <input type="email">
+            <br>
+            <button onclick="updateView()">Register</button>
+        ` 
+        }
+        
+        function updateView(){
+            document.body.innerHTML = /*HTML*/`
+            
+            `
+        }
+
+
+    </script>
+
+</body>
+</html>
