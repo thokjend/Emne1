@@ -1,48 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oppgave 141C</title>
+    <style>
+        #testDiv{
+            width: 50px;
+            height: 50px;
+        }
+    </style>
 </head>
+
 <body>
-    
-    <div id="background">
-        <label for="">Choose background color:</label>
-        <select name="" id="">
-            <option value="" selected disabled>Color:</option>
-            <option value="">Red</option>
-            <option value="">Green</option>
-            <option value="">Blue</option>
-            <option value="">Yellow</option>
-        </select>
+
+    <div id="app">
+
     </div>
 
-    <div id="foreground">
-        <label for="">Choose foreground color:</label>
-        <select name="" id="">
-            <option value="" selected disabled>Color:</option>
-            <option value="">Red</option>
-            <option value="">Green</option>
-            <option value="">Blue</option>
-            <option value="">Yellow</option>
-        </select>
-    </div>
-
-    <div>
-        <button onclick="addDiv()">Add div</button>
-    </div>
-    
-    
     <script>
-        //insert html
-        //Work in progress
+        // model
         let backgroundColor;
         let foregroundColor;
+        //view
 
+        show()
+        function show() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <div id="background">
+                <label for="">Choose background color:</label>
+                <select onchange="setBackgroundColor(this.value)">
+                    <option value="" selected disabled>Color:</option>
+                    <option value="red">Red</option>
+                    <option value="green">Green</option>
+                    <option value="blue">Blue</option>
+                    <option value="yellow">Yellow</option>
+                </select>
+            </div>
 
-        function addDiv(){
-            document.body.innerHTML += '<div id="testDiv" style="background-color: ${backgroundColor};">hei</div>'
+            <div id="foreground">
+                <label for="">Choose foreground color:</label>
+                 <select onchange="setForegroundColor(this.value)">
+                    <option value="" selected disabled>Color:</option>
+                    <option value="red">Red</option>
+                    <option value="green">Green</option>
+                    <option value="blue">Blue</option>
+                    <option value="yellow">Yellow</option>
+                </select>
+            </div>
+
+            <div>
+                <button onclick="addDiv()">Add div</button>
+            </div>
+        `
+        }
+        
+        //controller
+        function setBackgroundColor(color){
+            backgroundColor = color
+        }
+        function setForegroundColor(color){
+            foregroundColor = color
+        }
+
+        function addDiv() {
+            document.body.innerHTML +=  /*HTML*/`
+            <div id="testDiv"
+             style="background-color: ${backgroundColor};
+                    color: ${foregroundColor};">Test
+             </div>`
         }
 
 
@@ -51,4 +78,5 @@
 
 
 </body>
+
 </html>
