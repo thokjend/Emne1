@@ -15,30 +15,41 @@
         //modell
         let firstName;
         let email;
+        const getId = document.getElementById('app')
 
         //view
         show()
         function show(){
-           document.getElementById('app').innerHTML = /*HTML*/`
-             Enter your name:
+           getId.innerHTML = /*HTML*/`
+            Enter firstname:
             <input 
+                type="text"
                 value="${firstName || ''}"
-                oninput="firstName = this.value"
-                type="text">
+                oninput="firstName = this.value">
             <br>
             Enter your email:
-            <input type="email">
+            <input 
+                type="email"
+                value ="${email || ''}" 
+                oninput="email = this.value">
             <br>
             <button onclick="updateView()">Register</button>
         ` 
         }
         
+        //controller
         function updateView(){
-            document.body.innerHTML = /*HTML*/`
+            let nameText = firstName ? `Firstname: ${firstName}` : 'Please enter your firstname'
+            let emailText = email ? `Email: ${email}` : 'Please enter your email'
             
+            getId.innerHTML = /*HTML*/`
+            ${nameText}
+            <br/>
+            ${emailText}
+            <br/>
+            <button onclick="show()">Edit</button>
             `
         }
-
 
     </script>
 
