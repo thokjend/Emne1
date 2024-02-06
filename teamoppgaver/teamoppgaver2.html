@@ -20,48 +20,74 @@
         let colorIndex = 1;
 
         function addNormalPuzzlePieceToBoard(){
-            addPuzzlePiece('board', true, true, true, true, '', colorIndex, leftCounter, topCounter)
-            colorAndPositionController()
+            if(leftCounter < 24 && leftCounter > 0 && topCounter >= 6 && topCounter < 24){
+                addPuzzlePiece('board', true, true, true, true, '', colorIndex, leftCounter, topCounter)
+                colorAndPositionController()
+            }
+            
         }
 
         function addPuzzlePieceWithoutTopToBoard(){
-            addPuzzlePiece('board', false, true, true, true, '', colorIndex, leftCounter, topCounter)
-            colorAndPositionController()
+            if(leftCounter <= 18 && topCounter == 0 && leftCounter > 0){
+                addPuzzlePiece('board', false, true, true, true, '', colorIndex, leftCounter, topCounter)
+                colorAndPositionController()
+            }
+            
         }
-
         function addPuzzlePieceWithoutRightAndTopToBoard(){
-            addPuzzlePiece('board', false, false, true, true, '', colorIndex, leftCounter, topCounter)
-            colorAndPositionController()
+            if(leftCounter == 24 && topCounter == 0){
+                addPuzzlePiece('board', false, false, true, true, '', colorIndex, leftCounter, topCounter)
+                colorAndPositionController()
+            }
+            
         }
 
         function addPuzzlePieceWithoutLeftToBoard(){
-            addPuzzlePiece('board', false, true, true, false, '', colorIndex, leftCounter, topCounter)
-            colorAndPositionController()
+            if(leftCounter == 0 && topCounter == 0){
+                addPuzzlePiece('board', false, true, true, false, '', colorIndex, leftCounter, topCounter)
+                colorAndPositionController()
+            }
+            
         }
 
         function addPuzzlePieceWithTopWithoutRightToBoard(){
-            addPuzzlePiece('board', true, false, true, true, '', colorIndex, leftCounter, topCounter)
-            colorAndPositionController()
+            if(leftCounter == 24 && topCounter >= 6 && topCounter < 24){
+                addPuzzlePiece('board', true, false, true, true, '', colorIndex, leftCounter, topCounter)
+                colorAndPositionController()
+            }
+            
         }
 
         function addPuzzlePieceWithTopAndRightWithoutLeftToBoard(){
-            addPuzzlePiece('board', true, true, true, false, '', colorIndex, leftCounter, topCounter)
-            colorAndPositionController()
+            if(leftCounter == 0 && topCounter >= 6 && topCounter < 24){
+                addPuzzlePiece('board', true, true, true, false, '', colorIndex, leftCounter, topCounter)
+                colorAndPositionController()
+            }
+            
         }
 
         function addPuzzlePieceWithoutBottomAndRightToBoard(){
-            addPuzzlePiece('board', true, false, false, true, '', colorIndex, leftCounter, topCounter)
-            colorAndPositionController()
+            if(leftCounter == 24 && topCounter == 24){
+                addPuzzlePiece('board', true, false, false, true, '', colorIndex, leftCounter, topCounter)
+                colorAndPositionController() 
+            }
+            
         }
 
         function addPuzzlePieceWithoutBottomToBoard(){
-            addPuzzlePiece('board', true, true, false, true, '', colorIndex, leftCounter, topCounter)
-            colorAndPositionController()
+            if(topCounter == 24 && leftCounter <= 18 && leftCounter > 0){
+                addPuzzlePiece('board', true, true, false, true, '', colorIndex, leftCounter, topCounter)
+                colorAndPositionController()
+            }
+            
         }
 
         function addPuzzlePieceWithoutBottomAndLeftToBoard(){
-            addPuzzlePiece('board', true, true, false, false, '', colorIndex, leftCounter, topCounter)
-            colorAndPositionController()
+            if(leftCounter == 0 && topCounter == 24){
+                addPuzzlePiece('board', true, true, false, false, '', colorIndex, leftCounter, topCounter)
+                colorAndPositionController()
+            }
+            
         }
 
         function colorAndPositionController(){
