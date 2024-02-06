@@ -4,50 +4,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oppgave 124H</title>
+    <title>Oppgave 124G</title>
 </head>
 
 <body>
 
-
-    <div id="app">
-
-    </div>
-
-
     <script>
         function createNumberSelector(number, min, max, name) {
-            return document.getElementById('app').innerHTML = /*HTML*/`
+            let isActiveMin = number <= min ? 'disabled' : ''
+            let isActiveMax = number >= max ? 'disabled' : ''
+            return /*HTML*/`
                 <div id="${name}Main" style="display: flex;align-items: center;">
                     <div id="${name}" style="font-size: 300%;">${name}:${number}</div>
                     <div style="display: flex; flex-direction: column;align-items: flex-start;">
-                        <button onclick="select${name}()">▲</button>
-                        <button onclick="select${name}()" disabled>▼</button>
+                        <button onclick="select${name}()" ${isActiveMax}>▲</button>
+                        <button onclick="select${name}()" ${isActiveMin}>▼</button>
                     </div>
                 </div>
                 `
         }
-        function showDateSelector() {
-            document.getElementById('app').innerHTML =
-                createNumberSelector(13, 1, 31, 'Day')
-                + createNumberSelector(8, 1, 12, 'Month')
-                + createNumberSelector(2023, 2020, 2025, 'Year');
-        }
-
-        function selectDay(day) {
-            document.getElementById('DayMain').outerHTML =
-                createNumberSelector(day, 1, 31, 'Day');
-        }
-
-        function selectMonth(month) {
-            document.getElementById('MonthMain').outerHTML =
-                createNumberSelector(month, 1, 12, 'Month');
-        }
-
-        function selectYear(year) {
-            document.getElementById('YearMain').outerHTML =
-                createNumberSelector(year, 2000, 2023, 'Year');
-        }
+    
 
     </script>
 </body>

@@ -10,14 +10,10 @@
 <body>
 
     <script>
-        createNumberSelector(1,1,28,'Day')
-        createNumberSelector(1,1,12,'Month')
-        createNumberSelector(2020,2020,2025,'Year')
-
         function createNumberSelector(number, min, max, name) {
             let isActiveMin = number <= min ? 'disabled' : ''
             let isActiveMax = number >= max ? 'disabled' : ''
-            return document.body.innerHTML += /*HTML*/`
+            return /*HTML*/`
                 <div id="${name}Main" style="display: flex;align-items: center;">
                     <div id="${name}" style="font-size: 300%;">${name}:${number}</div>
                     <div style="display: flex; flex-direction: column;align-items: flex-start;">
