@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 124I</title>
+</head>
+
+<body>
+
+    <div id="app">
+    </div>
+    
+
+    <script>
+        let day = 4;
+        let month = 3;
+        let year = 2004;
+        let button = `<button onclick="showDate()">Submit date</button>`
+    
+        showDateSelector()
+        function showDateSelector() {
+            document.getElementById('app').innerHTML =
+                createNumberSelector(day, 1, 31, 'Day')
+                + createNumberSelector(month, 1, 12, 'Month')
+                + createNumberSelector(year, 2000, 2023, 'Year')
+                + button;
+        }
+
+        function createNumberSelector(number, min, max, name) {
+            let isActiveMin = number <= min ? 'disabled' : ''
+            let isActiveMax = number >= max ? 'disabled' : ''
+            return /*HTML*/`
+                <div id="${name}Main" style="display: flex;align-items: center;">
+                    <div id="${name}" style="font-size: 300%;">${name}:${number}</div>
+                    <div style="display: flex; flex-direction: column;align-items: flex-start;">
+                        <button onclick="select${name}(${number+1})" ${isActiveMax}>▲</button>
+                        <button onclick="select${name}(${number-1})" ${isActiveMin}>▼</button>
+                    </div>
+                </div>
+                `
+        }
+
+        function showDate(){
+            document.getElementById('app').innerHTML = 
+            day +'.' + month + '.' + year +  `<br/> <button onclick="showDateSelector()">Edit</button>`
+          
+        }
+
+        function selectDay(newDay) {
+            day = newDay
+            showDateSelector()
+        }
+
+        function selectMonth(newMonth) {
+            month = newMonth
+            showDateSelector()
+        }
+
+        function selectYear(newYear) {
+            year = newYear
+            showDateSelector()
+        }
+
+
+    </script>
+</body>
+
+</html>
