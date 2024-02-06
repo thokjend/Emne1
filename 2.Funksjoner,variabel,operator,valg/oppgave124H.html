@@ -13,42 +13,45 @@
     </div>
 
     <script>
+        let day = 4;
+        let month = 3;
+        let year = 2004;
     
         showDateSelector()
         function showDateSelector() {
             document.getElementById('app').innerHTML =
-                createNumberSelector(13, 1, 31, 'Day')
-                + createNumberSelector(8, 1, 12, 'Month')
-                + createNumberSelector(2001, 2000, 2023, 'Year');
+                createNumberSelector(day, 1, 31, 'Day')
+                + createNumberSelector(month, 1, 12, 'Month')
+                + createNumberSelector(year, 2000, 2023, 'Year');
         }
 
-        function createNumberSelector(day, min, max, name) {
-            let isActiveMin = day <= min ? 'disabled' : ''
-            let isActiveMax = day >= max ? 'disabled' : ''
+        function createNumberSelector(number, min, max, name) {
+            let isActiveMin = number <= min ? 'disabled' : ''
+            let isActiveMax = number >= max ? 'disabled' : ''
             return /*HTML*/`
                 <div id="${name}Main" style="display: flex;align-items: center;">
-                    <div id="${name}" style="font-size: 300%;">${name}:${day}</div>
+                    <div id="${name}" style="font-size: 300%;">${name}:${number}</div>
                     <div style="display: flex; flex-direction: column;align-items: flex-start;">
-                        <button onclick="select${name}()" ${isActiveMax}>▲</button>
-                        <button onclick="select${name}()" ${isActiveMin}>▼</button>
+                        <button onclick="select${name}(${number+1})" ${isActiveMax}>▲</button>
+                        <button onclick="select${name}(${number-1})" ${isActiveMin}>▼</button>
                     </div>
                 </div>
                 `
         }
 
-        function selectDay(day) {
-            document.getElementById('DayMain').outerHTML =
-                createNumberSelector(day, 1, 31, 'Day');
+        function selectDay(newDay) {
+            day = newDay
+            showDateSelector()
         }
 
-        function selectMonth(month) {
-            document.getElementById('MonthMain').outerHTML =
-                createNumberSelector(month, 1, 12, 'Month');
+        function selectMonth(newMonth) {
+            month = newMonth
+            showDateSelector()
         }
 
-        function selectYear(year) {
-            document.getElementById('YearMain').outerHTML =
-                createNumberSelector(year, 2000, 2023, 'Year');
+        function selectYear(newYear) {
+            year = newYear
+            showDateSelector()
         }
 
 
