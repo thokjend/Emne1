@@ -18,17 +18,18 @@
         let leftCounter = 24;
         let topCounter = 0;
         let colorIndex = 1;
+        console.log('left:' + leftCounter)
+        console.log('top:' + topCounter)
 
         function addNormalPuzzlePieceToBoard(){
-            if(leftCounter < 24 && leftCounter > 0 && topCounter >= 6 && topCounter < 24){
+            if(leftCounter < 24 && leftCounter > 0 && topCounter > 0 && topCounter < 24){
                 addPuzzlePiece('board', true, true, true, true, '', colorIndex, leftCounter, topCounter)
                 colorAndPositionController()
             }
-            
         }
 
         function addPuzzlePieceWithoutTopToBoard(){
-            if(leftCounter <= 18 && topCounter == 0 && leftCounter > 0){
+            if(leftCounter < 24 && topCounter == 0 && leftCounter > 0){
                 addPuzzlePiece('board', false, true, true, true, '', colorIndex, leftCounter, topCounter)
                 colorAndPositionController()
             }
@@ -51,7 +52,7 @@
         }
 
         function addPuzzlePieceWithTopWithoutRightToBoard(){
-            if(leftCounter == 24 && topCounter >= 6 && topCounter < 24){
+            if(leftCounter == 24 && topCounter > 0 && topCounter < 24){
                 addPuzzlePiece('board', true, false, true, true, '', colorIndex, leftCounter, topCounter)
                 colorAndPositionController()
             }
@@ -59,7 +60,7 @@
         }
 
         function addPuzzlePieceWithTopAndRightWithoutLeftToBoard(){
-            if(leftCounter == 0 && topCounter >= 6 && topCounter < 24){
+            if(leftCounter == 0 && topCounter > 0 && topCounter < 24){
                 addPuzzlePiece('board', true, true, true, false, '', colorIndex, leftCounter, topCounter)
                 colorAndPositionController()
             }
@@ -75,7 +76,7 @@
         }
 
         function addPuzzlePieceWithoutBottomToBoard(){
-            if(topCounter == 24 && leftCounter <= 18 && leftCounter > 0){
+            if(topCounter == 24 && leftCounter < 24 && leftCounter > 0){
                 addPuzzlePiece('board', true, true, false, true, '', colorIndex, leftCounter, topCounter)
                 colorAndPositionController()
             }
@@ -102,7 +103,8 @@
                 leftCounter = 24
                 topCounter += 6
             }
-
+            console.log('left:' + leftCounter)
+            console.log('top:' + topCounter)
             //if(leftCounter == 24 && topCounter > 24){
             //    console.log('test')
             //}            
