@@ -51,23 +51,25 @@
     </div>
 
     <script>
+        //model
         let imgElement = `<img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png">`
 
+        //view
         show()
         function show() {
             document.getElementById('app').innerHTML = /*HTML*/`
                 <div class="board">
-                    <div class="square">
+                    <div id="square1" class="square">
                         </div>
-                    <div class="square">
+                    <div id="square2" class="square">
                         </div>
-                    <div class="square">
+                    <div id="square3" class="square">
                         ${imgElement}
                     </div>
-                    <div class="square">
+                    <div id="square4" class="square">
                     </div>
                 </div>
-                <div class="buttons">
+                <div id="buttons" class="buttons">
                         <button onclick="showBoardWithLogo('upLeft')">▲</button>
                     <div>
                         ${insertDisabledButton('◀')}
@@ -78,25 +80,17 @@
                 `
         }
 
-        function insertDisabledButton(symbol){
+        //controller
+        function insertDisabledButton(symbol) {
             return /*HTML*/`<button disabled>${symbol}</button>`
         }
-
-
-        function showBoardWithLogo(position) {
-            if (position == 'upLeft') {
-                document.getElementById('app').innerHTML = /*HTML*/`
-                <div class="board">
-                    <div class="square">
-                        ${imgElement}
-                    </div>
-                    <div class="square">
-                    </div>
-                    <div class="square">
-                    </div>
-                    <div class="square">
-                    </div>
-                </div>
+       
+        function showBoardWithLogo(newPosition) {
+            if (newPosition == 'upLeft') {
+                document.getElementById("square3").innerHTML = ''
+                document.getElementById("square2").innerHTML = ''
+                document.getElementById("square1").innerHTML = imgElement
+                document.getElementById('buttons').innerHTML = /*HTML*/`
                 <div class="buttons">
                         ${insertDisabledButton('▲')}
                     <div>
@@ -107,18 +101,11 @@
                 </div>
                 `;
             }
-            else if (position == 'downRight') {
-                document.getElementById('app').innerHTML = /*HTML*/`
-                <div class="board">
-                    <div class="square">
-                    </div>
-                    <div class="square">
-                    </div>
-                    <div class="square">
-                    </div>
-                    <div class="square">
-                        ${imgElement}
-                    </div>
+            if (newPosition == 'downRight') {
+                document.getElementById("square2").innerHTML = ''
+                document.getElementById("square3").innerHTML = ''
+                document.getElementById("square4").innerHTML = imgElement
+                document.getElementById('buttons').innerHTML = /*HTML*/`
                 </div>
                 <div class="buttons">
                     <button onclick="showBoardWithLogo('upRight')">▲</button>
@@ -131,19 +118,11 @@
                 `;
 
             }
-            else if (position == 'downLeft') {
-                document.getElementById('app').innerHTML = /*HTML*/`
-                <div class="board">
-                    <div class="square">
-                        </div>
-                    <div class="square">
-                        </div>
-                    <div class="square">
-                        ${imgElement}
-                    </div>
-                    <div class="square">
-                    </div>
-                </div>
+            if (newPosition == 'downLeft') {
+                document.getElementById("square1").innerHTML = ''
+                document.getElementById("square4").innerHTML = ''
+                document.getElementById("square3").innerHTML = imgElement
+                document.getElementById('buttons').innerHTML = /*HTML*/`
                 <div class="buttons">
                     <button onclick="showBoardWithLogo('upLeft')">▲</button>
                     <div>
@@ -154,19 +133,11 @@
                 </div>
                 `;
             }
-            else if (position == 'upRight') {
-                document.getElementById('app').innerHTML = /*HTML*/`
-                <div class="board">
-                    <div class="square">
-                        </div>
-                    <div class="square">
-                        ${imgElement}
-                    </div>
-                    <div class="square">
-                    </div>
-                    <div class="square">
-                    </div>
-                </div>
+            if (newPosition == 'upRight') {
+                document.getElementById("square1").innerHTML = ''
+                document.getElementById("square4").innerHTML = ''
+                document.getElementById("square2").innerHTML = imgElement
+                document.getElementById('buttons').innerHTML = /*HTML*/`
                 <div class="buttons">
                     ${insertDisabledButton('▲')}
                     <div>
