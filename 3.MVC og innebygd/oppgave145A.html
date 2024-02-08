@@ -52,101 +52,71 @@
 
     <script>
         //model
-        let imgElement = `<img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png">`
+        let imgElement = `<img src="https://getacademy.no/hubfs/GET_RGB_logo-01-2.png">`;
+        let logoIndex = 0;
 
         //view
-        show()
-        function show() {
+        show('disabled', 'disabled', '', '',imgElement,'','','')
+        function show(button1, button2, button3, button4,img1,img2,img3,img4) {
             document.getElementById('app').innerHTML = /*HTML*/`
                 <div class="board">
                     <div id="square1" class="square">
-                        </div>
+                        ${img1}
+                    </div>
                     <div id="square2" class="square">
-                        </div>
+                        ${img2}
+                    </div>
                     <div id="square3" class="square">
-                        ${imgElement}
+                        ${img3}
                     </div>
                     <div id="square4" class="square">
+                        ${img4}
                     </div>
                 </div>
                 <div id="buttons" class="buttons">
-                        <button onclick="showBoardWithLogo('upLeft')">▲</button>
-                    <div>
-                        ${insertDisabledButton('◀')}
-                        <button onclick="showBoardWithLogo('downRight')">▶</button>
-                    </div>
-                        ${insertDisabledButton('▼')}
+                    <button ${button1} onclick="showBoardWithLogo('moveUp')">▲</button>
+                <div>
+                    <button ${button2} onclick="showBoardWithLogo('moveLeft')">◀</button>
+                    <button ${button3} onclick="showBoardWithLogo('moveRight')">▶</button>
+                </div>
+                    <button ${button4} onclick="showBoardWithLogo('moveDown')">▼</button>
                 </div>
                 `
         }
 
         //controller
-        function insertDisabledButton(symbol) {
-            return /*HTML*/`<button disabled>${symbol}</button>`
-        }
-       
-        function showBoardWithLogo(newPosition) {
-            if (newPosition == 'upLeft') {
-                document.getElementById("square3").innerHTML = ''
-                document.getElementById("square2").innerHTML = ''
-                document.getElementById("square1").innerHTML = imgElement
-                document.getElementById('buttons').innerHTML = /*HTML*/`
-                <div class="buttons">
-                        ${insertDisabledButton('▲')}
-                    <div>
-                        ${insertDisabledButton('◀')}
-                        <button onclick="showBoardWithLogo('upRight')">▶</button>
-                    </div>
-                    <button onclick="showBoardWithLogo('downLeft')">▼</button>
-                </div>
-                `;
+        function showBoardWithLogo(move) {
+            if (move == 'moveUp' && logoIndex == 2) {
+                logoIndex = 0
+                show('disabled', 'disabled', '', '',imgElement,'','','')
             }
-            if (newPosition == 'downRight') {
-                document.getElementById("square2").innerHTML = ''
-                document.getElementById("square3").innerHTML = ''
-                document.getElementById("square4").innerHTML = imgElement
-                document.getElementById('buttons').innerHTML = /*HTML*/`
-                </div>
-                <div class="buttons">
-                    <button onclick="showBoardWithLogo('upRight')">▲</button>
-                    <div>
-                        <button onclick="showBoardWithLogo('downLeft')">◀</button>
-                        ${insertDisabledButton('▶')}
-                    </div>
-                    ${insertDisabledButton('▼')}
-                </div>
-                `;
-
+            if (move == 'moveUp' && logoIndex == 3) {
+                logoIndex = 1
+                show('disabled', '', 'disabled', '','',imgElement,'','')
             }
-            if (newPosition == 'downLeft') {
-                document.getElementById("square1").innerHTML = ''
-                document.getElementById("square4").innerHTML = ''
-                document.getElementById("square3").innerHTML = imgElement
-                document.getElementById('buttons').innerHTML = /*HTML*/`
-                <div class="buttons">
-                    <button onclick="showBoardWithLogo('upLeft')">▲</button>
-                    <div>
-                        ${insertDisabledButton('◀')}
-                        <button onclick="showBoardWithLogo('downRight')">▶</button>
-                    </div>
-                    ${insertDisabledButton('▼')}
-                </div>
-                `;
+            if (move == 'moveDown' && logoIndex == 0) {
+                logoIndex = 2
+                show('', 'disabled', '', 'disabled','','',imgElement,'')
             }
-            if (newPosition == 'upRight') {
-                document.getElementById("square1").innerHTML = ''
-                document.getElementById("square4").innerHTML = ''
-                document.getElementById("square2").innerHTML = imgElement
-                document.getElementById('buttons').innerHTML = /*HTML*/`
-                <div class="buttons">
-                    ${insertDisabledButton('▲')}
-                    <div>
-                        <button onclick="showBoardWithLogo('upLeft')">◀</button>
-                        ${insertDisabledButton('▶')}
-                    </div>
-                    <button onclick="showBoardWithLogo('downRight')">▼</button>
-                </div>
-                `;
+            if (move == 'moveDown' && logoIndex == 1) {
+                logoIndex = 3
+                show('', '', 'disabled', 'disabled','','','',imgElement)
+            }
+            if (move == 'moveRight' && logoIndex == 0) {
+                logoIndex = 1
+                show('disabled', '', 'disabled', '','',imgElement,'','')
+            }
+            if (move == 'moveRight' && logoIndex == 2) {
+                logoIndex = 3
+                show('', '', 'disabled', 'disabled','','','',imgElement)
+            }
+            if (move == 'moveLeft' && logoIndex == 1) {
+                logoIndex = 0
+                show('disabled', 'disabled', '', '',imgElement,'','','')
+            }
+            if (move == 'moveLeft' && logoIndex == 3) {
+                logoIndex = 2
+                show('', 'disabled', '', 'disabled','','',imgElement,'')
             }
         }
     </script>
