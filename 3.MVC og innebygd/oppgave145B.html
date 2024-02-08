@@ -131,9 +131,9 @@
             `
         }
 
-        function setLayout(functionName, text) {
+        function setLayout(parameterName, text) {
             return /*HTML*/`
-            <button onclick="${functionName}()">
+            <button onclick="selectLayout('${parameterName}')">
                 ${text}
             </button>
             `
@@ -281,25 +281,22 @@
             document.getElementById('cardGame').innerHTML = '';
         }
 
-        function noLayout() {
-            document.getElementById('cards').classList.value = '';
-        }
-        function horizontalLayout() {
-            noLayout();
-            document.getElementById('cards').classList.add('horizontal');
-        }
-        function verticalLayout() {
-            noLayout();
-            document.getElementById('cards').classList.add('vertical');
-        }
-        function gridLayout() {
-            noLayout();
-            document.getElementById('cards').classList.add('grid');
-        }
 
-
-
-
+        function selectLayout(layout){
+            if(layout == 'noLayout'){
+                document.getElementById('cards').classList.value = '';
+            }else if(layout == 'verticalLayout'){
+                selectLayout('noLayout')
+                document.getElementById('cards').classList.add('vertical');
+            }else if(layout == 'horizontalLayout'){
+                selectLayout('noLayout')
+                document.getElementById('cards').classList.add('horizontal');
+            }else if(layout == 'gridLayout'){
+                selectLayout('noLayout')
+                document.getElementById('cards').classList.add('grid');
+            }
+        }
+       
 
     </script>
 
