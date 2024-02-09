@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 151A</title>
+</head>
+
+<body>
+
+    <div id="app">
+    </div>
+    
+
+    <script>
+
+        //model
+        let text = '';
+        let length = 0;
+
+        //view
+        updateView()
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            text field:
+            <br>
+            <input type="text" value="${text}" oninput=" text = this.value">
+            <br>
+            number:
+            <br>
+            <input type="number" value=${length} oninput="length = this.value">
+            <button onclick="repeatText()">Repeat</button>
+            <br/>
+            <div>${text}</div>
+            `
+        }
+
+        //controller
+        function repeatText(){
+            while(text.length < length){
+                text += text
+                updateView()  
+            }        
+        }   
+
+
+    </script>
+
+
+</body>
+
+</html>
