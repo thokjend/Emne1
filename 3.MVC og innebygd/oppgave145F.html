@@ -14,8 +14,8 @@
 
 
     <script>
-        let secretWord = 'test'
-        let currentWord = ''
+        let secretWord = 'TEST'
+        let currentWord = '____'
         let guess = '';
         
 
@@ -24,16 +24,11 @@
             document.getElementById('app').innerHTML = /*HTML*/`
             <input type="text" value="${guess}" oninput="guess = this.value">
             <button onclick="evaluateHangman(secretWord,currentWord,guess)">Guess letter</button>
-            <br/>
-            guess: <div id="guessWordLabel">${guess}</div><br/>
-            Current Word:<div id="currentWordLabel">${currentWord}</div> 
-        `
+            `
         }
        
 
         function evaluateHangman(secretWord, currentWord, guess){
-            currentWord += guess
-            updateView()
             const index = secretWord.indexOf(guess)
             if(index == -1){
                 return currentWord
