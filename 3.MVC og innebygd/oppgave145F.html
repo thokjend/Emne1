@@ -7,5 +7,44 @@
 </head>
 <body>
     
+    <div id="app">
+
+    </div>
+    
+
+
+    <script>
+        let secretWord = 'test'
+        let currentWord = '____'
+        let guess = '';
+        
+
+        updateView()
+        function updateView(){
+             document.getElementById('app').innerHTML = /*HTML*/`
+            <input type="text" value="${guess}" oninput="guess = this.value">
+            <button onclick="evaluateHangman(secretWord,currentWord,guess)">Guess letter</button>
+            <br/>
+            guess: <div id="guessWordLabel">${guess}</div><br/>
+            Current Word:<div id="currentWordLabel">${currentWord}</div> 
+        `
+        }
+       
+
+        function evaluateHangman(secretWord, currentWord, guess){
+            const index = secretWord.indexOf(guess)
+            if(index == -1){
+                return currentWord
+            }
+            const part1 = currentWord.substring(0,index);
+            const part2 = guess;
+            const part3 = currentWord.substring(index + 1);
+            const secretPart3 = secretWord.substring(index + 1);
+            return part1 + part2 + evaluateHangman(secretPart3, part3, guess);
+
+        }
+
+
+    </script>
 </body>
 </html>
