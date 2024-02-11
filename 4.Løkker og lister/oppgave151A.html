@@ -17,6 +17,7 @@
 
         //model
         let text = '';
+        let resultText = '';
         let length = 0;
 
         //view
@@ -40,8 +41,8 @@
         function repeatText(){
             while(text.length < length){
                 text += text
-                updateView()  
-            }        
+            }   
+            updateView()         
         }   
 
 

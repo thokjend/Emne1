@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 151C</title>
+    <style>
+        #app{
+            height: 95vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            padding: 10px;
+            border: 1px solid black;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        .container > div{
+            margin: 25px;
+            font-size: 2em;
+            font-weight: bolder;
+        }
+
+        
+        input{
+            margin: 25px;
+            font-size: 2em;
+            border-radius: 5px;
+            background-color: rgb(49, 49, 119);
+            color: aliceblue;
+            width: 300px;
+        }
+        button{
+            width: 250px;
+            height: 50px;
+            border-radius: 5px;
+            background-color: rgb(49, 49, 119);
+            color: aliceblue;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: rgb(91, 101, 179);
+        }
+
+        
+    </style>
+</head>
+<body>
+    
+
+    <div id="app">
+
+    </div>
+    
+    <script>
+
+        //model
+        let text = '';
+        let reversedText = '';
+
+        //view
+        updateView()
+        function updateView(){
+            let outputText = reversedText == '' ? 'output goes here' : reversedText
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <div class="container">
+                <input type="text" value="${text}" oninput="text=this.value">
+                <button onclick="getReversedText(text)">Reverse text</button>
+                <div>${outputText}</div>
+            </div>
+            `
+        }
+
+        //controller
+        function getReversedText(text){
+            for(let i = text.length - 1; i >= 0; i--){
+                reversedText += text.charAt(i)
+            }
+            updateView()
+            reversedText = ''
+        }
+        
+    </script>
+
+
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 151B</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+    </div>
+
+    <script>
+        //model
+        let startIndex = 0;
+        let endIndex = 0;
+        let step = 1;
+        let number = 0;
+
+        //view
+        updateView()
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <div>
+                <input type="number" value="${startIndex}" oninput="updateStartIndex(startIndex=this.value)">
+                <label>Start index</label>
+            </div>
+            <div>
+                <input type="number" value="${endIndex}" oninput="updateEndIndex(endIndex=this.value)">
+                <label>End index</label>
+            </div>
+            <div>
+                <input type="number" value="${step}" oninput="updateStep(step=this.value)">
+                <label>Step</label>
+            </div>
+            
+            <div id="output">output goes here</div>
+            `
+            updateCounter();
+        }
+
+        //controller functions
+        function updateStartIndex(value) {
+            startIndex = parseInt(value);
+            updateCounter();
+        }
+
+        function updateEndIndex(value) {
+            endIndex = parseInt(value);
+            updateCounter();
+        }
+
+        function updateStep(value) {
+            step = parseInt(value);
+            updateCounter();
+        }
+
+        function updateCounter() {
+            let output = '';
+            if (step > 0) {
+                for (number = startIndex; number <= endIndex; number += step) {
+                    output += number + ' ';
+                }
+            }
+            else if (step < 0){
+                for (number = startIndex; number >= endIndex; number += step) {
+                    output += number + ' ';
+            }
+        }
+        document.getElementById('output').textContent = output;
+    }
+
+    </script>
+</body>
+
+</html>
+<!--
+        let startIndex = 0;
+        let endIndex = 0;
+        let step = 1;
+        let number = 0;
+
+        updateView();
+
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <div>
+                <input type="number" value="${startIndex}" oninput="updateStartIndex(this.value)">
+                <label>Start index</label>
+            </div>
+            <div>
+                <input type="number" value="${endIndex}" oninput="updateEndIndex(this.value)">
+                <label for="">End index</label>
+            </div>
+            <div>
+                <input type="number" value="${step}" oninput="updateStep(this.value)">
+                <label for="">Step</label>
+            </div>
+            <div id="output">insert number here</div>
+            `;
+            updateCounter();
+        }   
+
+        function updateStartIndex(value) {
+            startIndex = parseInt(value);
+            updateCounter();
+        }
+
+        function updateEndIndex(value) {
+            endIndex = parseInt(value);
+            updateCounter();
+        }
+
+        function updateStep(value) {
+            step = parseInt(value);
+            updateCounter();
+        }
+
+        function updateCounter() {
+            let output = '';
+            for (number = startIndex; number <= endIndex; number += step) {
+                output += number + ' ';
+            }
+            document.getElementById('output').textContent = output;
+        }
+-->
