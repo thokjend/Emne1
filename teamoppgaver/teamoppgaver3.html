@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Teamoppgave 3</title>
     <style>
         .game-container {
             display: flex;
@@ -108,7 +108,6 @@
         let largeDiskTowerIndex = 0;
 
         // view 
-
         function viewTowerFirstPosition(size, index) {
             let view = '';
             if (index == 0) {
@@ -204,9 +203,6 @@
                     || (smallDiskTowerIndex == 0 && mediumDiskTowerIndex == 0 && largeDiskTowerIndex == 0)
                     ? 'disabled' : ''
 
-
-
-
             document.getElementById('app').innerHTML = /*HTML*/`
                 <div class="game-container">
                     <div class="tower-container">
@@ -279,6 +275,7 @@
                 `
             }
         }
+
         function restartGame() {
             smallDiskTowerIndex = 0;
             mediumDiskTowerIndex = 0;
