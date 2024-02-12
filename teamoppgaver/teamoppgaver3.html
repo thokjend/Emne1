@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .game-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+
+        .tower-container {
+            position: relative;
+        }
+
+        .tower {
+            width: 100px;
+            height: 120px;
+            display: flex;
+            flex-direction: column-reverse;
+            align-items: center;
+            border-bottom: 8px solid darkred;
+        }
+
+        .tower-container::before {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 8px;
+            height: 120px;
+            z-index: -10;
+            background-color: darkred;
+        }
+
+        .disk {
+            width: 20px;
+            height: 20px;
+            background-color: blue;
+            border: 4px solid gray;
+            margin-bottom: 5px;
+        }
+
+
+        #winContainer {
+            width: 500px;
+            height: 500px;
+            border: 1px solid black;
+            z-index: 9999;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            background-color: rgb(96, 96, 172);
+        }
+
+        .centerContent {
+            margin: 40px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: aliceblue;
+        }   
+        #win-message{
+            font-size: 3em;
+            text-align: center;
+            font-weight: bold;
+        }    
+
+        #restart-button{
+            margin-top: 10vh;
+            width: 300px;
+            height: 60px;
+            font-size: 1.5em;
+            font-weight: bolder;
+            background-color: rgb(45, 45, 88);
+            color: hsl(209, 83%, 91%); 
+        }
+        #restart-button:hover{
+            color: hsl(0, 0%, 100%);
+            cursor: pointer;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+    
+    <div id="winContainer"></div>
+
+    <script>
+        // model
+        //   hvor er diskene, 0 = venstre tårn, 1 = midten, 2 = høyre
+        //   alle starter til venstre
+        let smallDiskTowerIndex = 0;
+        let mediumDiskTowerIndex = 0;
+        let largeDiskTowerIndex = 0;
+
+        // view 
+
+        function viewTowerFirstPosition(size, index) {
+            let view = '';
+            if (index == 0) {
+                view = `<div class="disk" style="width: ${size}px"></div>`;
+            }
+            return view
+        }
+
+        function viewTowerSecondPosition(size, index) {
+            let view = '';
+            if (index == 1) {
+                view = `<div class="disk" style="width: ${size}px"></div>`;
+            }
+            return view
+        }
+
+        function viewTowerThirdPosition(size, index) {
+            let view = '';
+            if (index == 2) {
+                view = `<div class="disk" style="width: ${size}px"></div>`;
+            }
+            return view
+        }
+
+
+        updateView();
+        function updateView() {
+            let disabledFirstSmall = smallDiskTowerIndex == 0 ? 'disabled' : ''
+            let disabledFirstMedium =
+                mediumDiskTowerIndex == 0
+                    || (smallDiskTowerIndex == 0 && mediumDiskTowerIndex == 1)
+                    || (smallDiskTowerIndex == 0 && mediumDiskTowerIndex == 2)
+                    || (smallDiskTowerIndex == 1 && mediumDiskTowerIndex == 1)
+                    || (smallDiskTowerIndex == 2 && mediumDiskTowerIndex == 2)
+                    ? 'disabled' : ''
+            let disabledFirstLarge =
+                largeDiskTowerIndex == 0
+                    || (smallDiskTowerIndex == 0 && largeDiskTowerIndex == 1)
+                    || (smallDiskTowerIndex == 0 && largeDiskTowerIndex == 2)
+                    || (mediumDiskTowerIndex == 0 && largeDiskTowerIndex == 2)
+                    || (smallDiskTowerIndex == 1 && largeDiskTowerIndex == 1)
+                    || (smallDiskTowerIndex == 2 && largeDiskTowerIndex == 2)
+                    || (mediumDiskTowerIndex == 2 && largeDiskTowerIndex == 2)
+                    || (largeDiskTowerIndex == 1 && mediumDiskTowerIndex == 0)
+                    || (largeDiskTowerIndex == 1 && mediumDiskTowerIndex == 2)
+                    || (largeDiskTowerIndex == 1 && mediumDiskTowerIndex == 1)
+                    ? 'disabled' : ''
+
+            let disabledSecondSmall = smallDiskTowerIndex == 1 ? 'disabled' : ''
+            let disabledSecondMedium =
+                mediumDiskTowerIndex == 1
+                    || (smallDiskTowerIndex == 1 && mediumDiskTowerIndex == 0)
+                    || (smallDiskTowerIndex == 1 && mediumDiskTowerIndex == 1)
+                    || (smallDiskTowerIndex == 1 && mediumDiskTowerIndex == 2)
+                    || (smallDiskTowerIndex == 2 && mediumDiskTowerIndex == 2)
+                    || (smallDiskTowerIndex == 0 && mediumDiskTowerIndex == 0)
+                    || (smallDiskTowerIndex == 0 && mediumDiskTowerIndex == 0 && largeDiskTowerIndex == 0)
+                    ? 'disabled' : ''
+            let disabledSecondLarge =
+                largeDiskTowerIndex == 1
+                    || (smallDiskTowerIndex == 1 && largeDiskTowerIndex == 0)
+                    || (mediumDiskTowerIndex == 0 && largeDiskTowerIndex == 0)
+                    || (largeDiskTowerIndex == 0 && mediumDiskTowerIndex == 1)
+                    || (smallDiskTowerIndex == 1 && largeDiskTowerIndex == 1)
+                    || (smallDiskTowerIndex == 1 && largeDiskTowerIndex == 2)
+                    || (smallDiskTowerIndex == 2 && largeDiskTowerIndex == 2)
+                    || (smallDiskTowerIndex == 0 && largeDiskTowerIndex == 0)
+                    || (mediumDiskTowerIndex == 1 && largeDiskTowerIndex == 2)
+                    || (mediumDiskTowerIndex == 2 && largeDiskTowerIndex == 2)
+                    || (largeDiskTowerIndex == 1 && mediumDiskTowerIndex == 1)
+                    || (smallDiskTowerIndex == 0 && mediumDiskTowerIndex == 0 && largeDiskTowerIndex == 0)
+                    ? 'disabled' : ''
+
+            let disabledThirdSmall = smallDiskTowerIndex == 2 ? 'disabled' : ''
+            let disabledThirdMedium =
+                mediumDiskTowerIndex == 2
+                    || (smallDiskTowerIndex == 1 && mediumDiskTowerIndex == 1)
+                    || (smallDiskTowerIndex == 2 && mediumDiskTowerIndex == 0)
+                    || (smallDiskTowerIndex == 2 && mediumDiskTowerIndex == 1)
+                    || (smallDiskTowerIndex == 0 && mediumDiskTowerIndex == 0)
+                    || (smallDiskTowerIndex == 0 && mediumDiskTowerIndex == 0 && largeDiskTowerIndex == 0)
+                    ? 'disabled' : ''
+            let disabledThirdLarge =
+                largeDiskTowerIndex == 2
+                    || (smallDiskTowerIndex == 2 && largeDiskTowerIndex == 0)
+                    || (mediumDiskTowerIndex == 0 && largeDiskTowerIndex == 0)
+                    || (mediumDiskTowerIndex == 2 && largeDiskTowerIndex == 0)
+                    || (largeDiskTowerIndex == 1 && smallDiskTowerIndex == 2)
+                    || (smallDiskTowerIndex == 1 && largeDiskTowerIndex == 1)
+                    || (smallDiskTowerIndex == 0 && largeDiskTowerIndex == 0)
+                    || (largeDiskTowerIndex == 1 && mediumDiskTowerIndex == 2)
+                    || (largeDiskTowerIndex == 1 && mediumDiskTowerIndex == 1)
+                    || (smallDiskTowerIndex == 0 && mediumDiskTowerIndex == 0 && largeDiskTowerIndex == 0)
+                    ? 'disabled' : ''
+
+
+
+
+            document.getElementById('app').innerHTML = /*HTML*/`
+                <div class="game-container">
+                    <div class="tower-container">
+                        <div class="tower">
+                            ${viewTowerFirstPosition(70, largeDiskTowerIndex)}
+                            ${viewTowerFirstPosition(50, mediumDiskTowerIndex)}
+                            ${viewTowerFirstPosition(30, smallDiskTowerIndex)}
+                        </div>
+                    </div>
+                    <div class="tower-container">
+                        <div class="tower">
+                            ${viewTowerSecondPosition(70, largeDiskTowerIndex)}
+                            ${viewTowerSecondPosition(50, mediumDiskTowerIndex)}
+                            ${viewTowerSecondPosition(30, smallDiskTowerIndex)}
+                         </div>
+                    </div>
+                    <div class="tower-container">
+                        <div class="tower">
+                            ${viewTowerThirdPosition(70, largeDiskTowerIndex)}
+                            ${viewTowerThirdPosition(50, mediumDiskTowerIndex)}
+                            ${viewTowerThirdPosition(30, smallDiskTowerIndex)}                           
+                        </div>
+                    </div>
+                </div>
+                Flytt liten disk til 
+                <button ${disabledFirstSmall} onclick="moveSmallDisk(0)">venstre tårn</button>
+                <button ${disabledSecondSmall} onclick="moveSmallDisk(1)">midtre tårn</button>
+                <button ${disabledThirdSmall} onclick="moveSmallDisk(2)">høyre tårn</button>
+                <br/>
+                Flytt medium disk
+                <button ${disabledFirstMedium} onclick="moveMediumDisk(0)">venstre tårn</button>
+                <button ${disabledSecondMedium} onclick="moveMediumDisk(1)">midtre tårn</button>
+                <button ${disabledThirdMedium} onclick="moveMediumDisk(2)">høyre tårn</button>
+                <br/>
+                Flytt stor disk
+                <button ${disabledFirstLarge} onclick="moveLargeDisk(0)">venstre tårn</button>
+                <button ${disabledSecondLarge} onclick="moveLargeDisk(1)">midtre tårn</button>
+                <button ${disabledThirdLarge} onclick="moveLargeDisk(2)">høyre tårn</button>
+                <br/>
+            `;
+            checkWinCondition();
+        }
+
+        // controller
+        function moveSmallDisk(toTowerIndex) {
+            smallDiskTowerIndex = toTowerIndex
+            updateView();
+        }
+
+        function moveMediumDisk(toTowerIndex) {
+            mediumDiskTowerIndex = toTowerIndex
+            updateView();
+        }
+
+        function moveLargeDisk(toTowerIndex) {
+            largeDiskTowerIndex = toTowerIndex
+            updateView();
+        }
+
+        function checkWinCondition() {
+            if (smallDiskTowerIndex == 2 && mediumDiskTowerIndex == 2 && largeDiskTowerIndex == 2) {
+                document.getElementById('winContainer').style.display = 'block';
+                document.getElementById('winContainer').innerHTML = /*HTML*/ `
+                <div class="centerContent">
+                    <div id="win-message">
+                        ${"Congratulations! You've solved the Tower of Hanoi puzzle!"}
+                        </div>
+                    <button id="restart-button" onclick="restartGame()">Restart Game</button>
+                </div>
+                `
+            }
+        }
+        function restartGame() {
+            smallDiskTowerIndex = 0;
+            mediumDiskTowerIndex = 0;
+            largeDiskTowerIndex = 0;
+            document.getElementById('winContainer').style.display = 'none';
+            updateView();
+        }
+
+        document.body.innerHTML += `
+            <h4>Oppgaver</h4>
+            Disse oppgavene er ment å løses med kun funksjoner, variabler, operatorer, if-setninger og MVC. Man trenger
+            ikke bruke løkker eller lister.
+            <ol>
+                <li>
+                    Studer spillet her: <a href="https://www.mathsisfun.com/games/towerofhanoi.html">mathsisfun.com/games/towerofhanoi.html</a>
+                    og sørg for at dere forstår reglene. 
+                </li>
+                <li>
+                    Sørg for at <tt>updateView()</tt> tegner opp diskene ut fra innholdet av variablene i modellen.
+                    Merk at pga <tt>display: flex</tt> og <tt>flex-direction: column-reverse</tt> må dere legge til 
+                    diskene i motsatt rekkefølge av ellers. Den siste taggen inne i hvert tårn kommer øverst
+                </li>
+                <li>
+                    Implementer aller enkleste versjon av controller-funksjonene, nemlig å flytte hver disk uten å sjekke om det er lov
+                    eller ikke. Sjekk at det virker før dere går videre. 
+                </li>
+                <li>
+                    Implementer så reglene. Du kan ikke flytte en disk til et tårn om det alt ligger en disk der som er mindre.                
+                </li>
+                <li>
+                    Skjul alltid knappene som flytter en disk dit den allerede er. Skjul også knappene som er ulovlige å utføre.
+                </li>
+                <li>
+                    Vis en melding på skjermen hvis spillet er løst, det vil si at alle diskene er på høyre tårn. Vis i det
+                    tilfellet en knapp for å starte spillet på nytt. 
+                </li>
+            </ol>
+        `;
+    </script>
+</body>
+
+</html>
