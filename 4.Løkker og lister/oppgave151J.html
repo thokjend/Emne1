@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 151J</title>
+</head>
+
+<body>
+
+    <div id="app">
+    </div>
+
+
+    <script>
+        //model
+        let text = ''
+
+        //view
+        updateView()
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <label>text goes here</label>
+            <br/>
+            <input type="text" value="${text}" onchange="text=this.value" >
+            <button onclick="showPage()">Find words</button>
+            <div>longest word: ${showWord()[0]}</div>
+            `
+        }
+
+        //controller
+        function showWord() {
+            let count = 0;
+            let textList = text.split(' ');
+            let longestWord = textList[0];
+            let returnArray = []
+
+            for(let i = 0; i < textList.length; i++){
+                if(textList[i].length > longestWord.length){
+                   longestWord = textList[i] 
+                }
+            }
+            returnArray.push(longestWord)
+            returnArray.push(count)
+            return returnArray
+        }
+
+        function showPage() {
+            updateView()
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
