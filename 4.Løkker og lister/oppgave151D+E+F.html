@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 151D+E+F</title>
+</head>
+<body>
+
+
+    <div id="app">
+    </div>
+    
+    <script>
+
+        let text = '';
+        let letter = '';
+        let counter = 0;
+
+        updateView()
+        function updateView(){
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <h1>Choose a letter</h1>
+            <input value="${letter}" onchange="letter = this.value">
+            <br/>
+            <h1>Enter text you want to count letters in</h1>
+            <input value="${text}" onchange="text = this.value">
+            <br/>
+            <button onclick="countLetters(letter)">Count amount of letters</button>
+            <div style="font-size: 3em ;" >${counter}</div>
+            `
+        }
+
+        function countLetters(letter){
+            for(let i = 0; i < text.length; i++){
+                if(text[i] == letter.toLowerCase() || text[i] == letter.toUpperCase()){
+                    counter ++
+                }
+            }
+            updateView()
+            counter = 0;
+        }
+
+
+    </script>
+
+</body>
+</html>
