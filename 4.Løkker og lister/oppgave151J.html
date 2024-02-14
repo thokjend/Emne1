@@ -24,7 +24,7 @@
             <label>Find word statistics</label>
             <br/>
             <input type="text" value="${text}" onchange="text=this.value" >
-            <button onclick="showPage()">Find words</button>
+            <button onclick="showPage()">Enter text</button>
             <div>Longest word: ${showWord()[0]}</div>
             <div>Number of words: ${showWord()[1]}</div>
             <div>Word with most vowels: ${showWord()[2]}</div>
@@ -46,7 +46,7 @@
                 let vowelCount = 0
                 for(let j = 0; j < textList[i].length; j++){
                     countAllLetters++
-                    if('aeiouy'.includes(textList[i][j])){
+                    if('aeiouyæøå'.includes(textList[i][j])){
                         vowelCount++
                     }
                 }
