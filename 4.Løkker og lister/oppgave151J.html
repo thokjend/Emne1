@@ -21,29 +21,53 @@
         updateView()
         function updateView() {
             document.getElementById('app').innerHTML = /*HTML*/`
-            <label>text goes here</label>
+            <label>Find word statistics</label>
             <br/>
             <input type="text" value="${text}" onchange="text=this.value" >
             <button onclick="showPage()">Find words</button>
-            <div>longest word: ${showWord()[0]}</div>
+            <div>Longest word: ${showWord()[0]}</div>
+            <div>Number of words: ${showWord()[1]}</div>
+            <div>Word with most vowels: ${showWord()[2]}</div>
             `
         }
 
         //controller
         function showWord() {
-            let count = 0;
             let textList = text.split(' ');
             let longestWord = textList[0];
-            let returnArray = []
+            let countWords = 0;
+            let wordWithMostVowels = '';
+            let maxVowels = 0
+            
 
-            for(let i = 0; i < textList.length; i++){
-                if(textList[i].length > longestWord.length){
-                   longestWord = textList[i] 
+            for (let i = 0; i < textList.length; i++) {
+                let vowelCount = 0
+                for(let j = 0; j < textList[i].length; j++){
+                    if('aeiouy'.includes(textList[i][j])){
+                        vowelCount++
+                    }
+                }
+
+
+
+
+
+                
+                if(vowelCount > maxVowels){
+                    maxVowels = vowelCount
+                    wordWithMostVowels = textList[i]
+                }
+
+                if (textList[i].trim() != '') {
+                    countWords++
+                }
+                if (textList[i].length > longestWord.length) {
+                    longestWord = textList[i]
                 }
             }
-            returnArray.push(longestWord)
-            returnArray.push(count)
-            return returnArray
+
+
+            return [longestWord, countWords, wordWithMostVowels]
         }
 
         function showPage() {
