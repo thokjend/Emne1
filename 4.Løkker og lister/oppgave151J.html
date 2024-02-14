@@ -28,6 +28,8 @@
             <div>Longest word: ${showWord()[0]}</div>
             <div>Number of words: ${showWord()[1]}</div>
             <div>Word with most vowels: ${showWord()[2]}</div>
+            <div>Average word length: ${showWord()[3] || 0}</div>
+            
             `
         }
 
@@ -38,21 +40,16 @@
             let countWords = 0;
             let wordWithMostVowels = '';
             let maxVowels = 0
-            
+            let countAllLetters = 0
 
             for (let i = 0; i < textList.length; i++) {
                 let vowelCount = 0
                 for(let j = 0; j < textList[i].length; j++){
+                    countAllLetters++
                     if('aeiouy'.includes(textList[i][j])){
                         vowelCount++
                     }
                 }
-
-
-
-
-
-                
                 if(vowelCount > maxVowels){
                     maxVowels = vowelCount
                     wordWithMostVowels = textList[i]
@@ -67,7 +64,7 @@
             }
 
 
-            return [longestWord, countWords, wordWithMostVowels]
+            return [longestWord, countWords, wordWithMostVowels, countAllLetters / countWords]
         }
 
         function showPage() {
