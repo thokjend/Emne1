@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 152C</title>
+    <style>
+        #app {
+            display: grid;
+            max-width: 550px;
+            grid-template-columns: repeat(3, 1fr);
+            border: 5px solid black;
+            background-color: gray;
+
+        }
+
+        #app > div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 5em;
+            border: 3px solid black;
+            border-radius: 25px;
+            gap: 10px;
+            padding: 50px;
+            background-color: white;
+            font-weight: bolder;
+            user-select: none;
+        }
+
+        #app > div:hover {
+            background-color: rgb(57, 56, 60);
+            color: aliceblue;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+    </div>
+
+    <script>
+        //model
+        let numbers =   [1, 2, 5,
+                         7, 3, 4,
+                         8, 6, ''];
+
+
+        //view
+        updateView()
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            ${createDiv(numbers)}
+            `
+        }
+        function createDiv(numbers) {
+            html = ''
+            for (let i = 0; i < numbers.length; i++) {
+                html += `<div onclick="moveIndex('${i}')">${numbers[i]}</div>`
+            }
+            return html
+        }
+
+        //controller
+        function moveIndex(index) {
+            let emptyIndex = numbers.indexOf('');
+            if (numbers[index] != '') {
+                numbers[emptyIndex] = numbers[index];
+                numbers[index] = '';
+                updateView();
+            }
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
