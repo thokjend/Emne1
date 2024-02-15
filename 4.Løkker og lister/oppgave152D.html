@@ -19,8 +19,10 @@
     <script>
         //model
         let text = ''
-
-
+        let listOfWords;
+        let words = []
+        let wordCounts = []
+        const letters = /^[A-Åa-åøæØÆ\s]+$/
 
         //view
         updateView()
@@ -29,22 +31,39 @@
             <textarea value ="${text}" onchange="text = this.value"  cols="30" rows="10"></textarea>
             <br/>
             <button onclick="checkText()">check text</button>
+            
             `
         }
         //controller
         function checkText() {
-            let letters = /^[A-Åa-åøæØÆ\s]+$/ 
-            let newText = ''
-            for(let i = 0; i < text.length; i++){
-                if(letters.test(text[i])){
-                    newText += text[i]
+            let cleanedText = ''
+            for (let i = 0; i < text.length; i++) {
+                if (letters.test(text[i])) {
+                    cleanedText += text[i]
                 }
-                
             }
-            console.log(newText.split(' '))
-            
+            listOfWords = cleanedText.split(' ')
+
+
+            for (let j = 0; j < listOfWords.length; j++) {
+                let index = words.indexOf(listOfWords[j]);
+                if (index != -1) {
+                    wordCounts[index]++;
+                } else {
+                    words.push(listOfWords[j]);
+                    wordCounts.push(1);
+                }
+            }
+            displayCounts()
         }
 
+        function displayCounts() {
+            let result = '<h3>Word Counts:</h3>';
+            for (let i = 0; i < words.length; i++) {
+                result += `${words[i]}: ${wordCounts[i]}<br>`;
+            }
+            document.getElementById('app').innerHTML += result;
+        }
 
 
     </script>
