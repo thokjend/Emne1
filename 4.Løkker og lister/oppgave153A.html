@@ -13,7 +13,8 @@
     <script>
         //model
         let numbersList = [];
-        let pageSize = 10
+        let pageSize = 10;
+        //let page = 1;
         generateNumberList(numbersList);
 
         //view
@@ -26,12 +27,16 @@
                 ` 
             }
             button = `<button onclick="showNextPage()">Show next page</button>`
-            document.getElementById('app').innerHTML = html + button
+            document.getElementById('app').innerHTML = button + html
                         
         }
 
         //controller
-        //function showNextPage(){}
+        function showNextPage(){
+            pageSize += 10
+            updateView(filterNumbers(numbersList, pageSize))
+        }
+
 
         function filterNumbers(numbers, maxNumber){
             let filterdNumbersList = [];
