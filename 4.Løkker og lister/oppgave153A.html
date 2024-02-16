@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 153A</title>
+</head>
+<body>
+
+    <div id="app">
+    </div>
+
+    <script>
+        //model
+        let numbersList = [];
+        let pageSize = 10
+        generateNumberList(numbersList);
+
+        //view
+        updateView(filterNumbers(numbersList, pageSize))
+        function updateView(numbers){
+            let html = '';
+            for(let number of numbers){
+                html += /*HTML*/ `
+                    <li>${number}</li>
+                ` 
+            }
+            button = `<button onclick="showNextPage()">Show next page</button>`
+            document.getElementById('app').innerHTML = html + button
+                        
+        }
+
+        //controller
+        //function showNextPage(){}
+
+        function filterNumbers(numbers, maxNumber){
+            let filterdNumbersList = [];
+            for(let number of numbers){
+                if(number <= maxNumber){
+                    filterdNumbersList.push(number)
+                }
+            }
+            
+            return filterdNumbersList
+        }
+
+        
+
+
+        function generateNumberList(list){
+            for (let i = 1; i <= 150; i++) {
+            list.push(i);
+        }
+        return list
+    }
+
+
+
+    </script>
+</body>
+</html>
