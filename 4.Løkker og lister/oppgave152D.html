@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oppgave 152D</title>
     <style>
-
+      #result{
+        font-size: 20px;
+      }
     </style>
 </head>
 
@@ -27,12 +29,19 @@
         //view
         updateView()
         function updateView() {
+            let result = '';
+            for (let i = 0; i < words.length; i++) {
+                result += `${words[i]}: ${wordCounts[i]} <br>`;
+            }
             document.getElementById('app').innerHTML = /*HTML*/`
             <textarea value ="${text}" onchange="text = this.value"  cols="30" rows="10"></textarea>
             <br/>
             <button onclick="checkText()">check text</button>
-            
+            <div> Word | Word Count:</div>
+            <div id='result'>${result || ''}</div>
             `
+            words = []
+            wordCounts = []
         }
         //controller
         function checkText() {
@@ -54,17 +63,9 @@
                     wordCounts.push(1);
                 }
             }
-            displayCounts()
+        
+            updateView()
         }
-
-        function displayCounts() {
-            let result = '<h3>Word Counts:</h3>';
-            for (let i = 0; i < words.length; i++) {
-                result += `${words[i]}: ${wordCounts[i]}<br>`;
-            }
-            document.getElementById('app').innerHTML += result;
-        }
-
 
     </script>
 </body>
