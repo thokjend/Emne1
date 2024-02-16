@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 152E</title>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+
+    <script>
+        //model
+
+        //view
+        updateView()
+        function updateView() {
+            document.getElementById('app').innerHTML = /*HTML*/`
+            <h1>run the fuction isSortedList in the console</h1>
+            `
+        }
+
+        //controller
+        function isSortedList(list) {
+            for (let i = 0; i < list.length; i++) {
+                if(list[i] > list[i+1]){
+                    return false
+                }
+            }
+            return true
+        }
+
+
+    </script>
+</body>
+
+</html>
