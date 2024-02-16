@@ -24,7 +24,8 @@
         let listOfWords;
         let words = []
         let wordCounts = []
-        const letters = /^[A-Åa-åøæØÆ\s]+$/
+        const allValidCharacters = 'abcdefghijklmnopqrstuvwxyzøæåABCDEFGHIJKLMNOPQRSTUVWXYZØÆÅ '
+        //const letters = /^[A-Åa-åøæØÆ\s]+$/
 
         //view
         updateView()
@@ -47,12 +48,13 @@
         function checkText() {
             let cleanedText = ''
             for (let i = 0; i < text.length; i++) {
-                if (letters.test(text[i])) {
+                if (allValidCharacters.includes(text[i])) {
                     cleanedText += text[i]
-                    listOfWords = cleanedText.split(' ')
                 }
             }
-        
+            listOfWords = cleanedText.split(' ')
+            
+            
             for (let j = 0; j < listOfWords.length; j++) {
                 let index = words.indexOf(listOfWords[j]);
                 if (index != -1) {
