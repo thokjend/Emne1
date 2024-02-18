@@ -14,7 +14,7 @@
 
     <script>
         //model
-        let numbersList = generateNumberList(101);
+        let numbersList = generateNumberList(125);
         let pageSize = 10;
         let currentPage = 0;
         let visibleItems = numbersList.slice(0, pageSize);
@@ -24,17 +24,18 @@
         updateView()
         function updateView() {
             let html = '';
-            let buttons = ` <div>
-                                <button onclick="showPreviousPage()"> Previous page </button>
-                                <span id="page-indicator">0</span>
-                                <button onclick="showNextPage()"> Next page </button>
-                            </div>`
+            let buttons = '';
+
+            for(let i = 1; i <= Math.ceil(numbersList.length / pageSize); i++){
+                buttons += `<button onclick="showPage(${i})">${i}</button>`
+            }
+                
             for (let number of visibleItems) {
                 html += /*HTML*/ `
-                    <li>${number}</li>
+                    <li>${number+1}</li>
                 `
             }
-            document.getElementById('app').innerHTML = `<ul>${html}</ul>` + buttons
+            document.getElementById('app').innerHTML = `<ul>${html}</ul>` + `<div>${buttons}</div>`
 
         }
 
@@ -44,23 +45,15 @@
             visibleItems = numbersList.slice(startIndex, startIndex + pageSize) 
         }
 
-        function showNextPage() {
-            currentPage += 1
+        function showPage(pageIndex){
+            currentPage = pageIndex - 1 
             updateVisibleItems()
             updateView()
         }
-
-        function showPreviousPage() {
-            currentPage -= 1
-            updateVisibleItems()
-            updateView()
-        }
-
-
 
         function generateNumberList(numberOfItems) {
             let items = []
-            for (let i = 1; i < numberOfItems; i++) {
+            for (let i = 0; i < numberOfItems; i++) {
                 items.push(i);
             }
             return items
