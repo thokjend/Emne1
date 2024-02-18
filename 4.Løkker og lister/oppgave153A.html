@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Oppgave 153A</title>
 </head>
+
 <body>
 
     <div id="app">
@@ -12,55 +14,61 @@
 
     <script>
         //model
-        let numbersList = [];
+        let numbersList = generateNumberList(101);
         let pageSize = 10;
-        //let page = 1;
-        generateNumberList(numbersList);
+        let currentPage = 0;
+        let visibleItems = numbersList.slice(0, pageSize);
+        ;
 
         //view
-        updateView(filterNumbers(numbersList, pageSize))
-        function updateView(numbers){
+        updateView()
+        function updateView() {
             let html = '';
-            for(let number of numbers){
+            let buttons = ` <div>
+                                <button onclick="showPreviousPage()"> Previous page </button>
+                                <span id="page-indicator">0</span>
+                                <button onclick="showNextPage()"> Next page </button>
+                            </div>`
+            for (let number of visibleItems) {
                 html += /*HTML*/ `
                     <li>${number}</li>
-                ` 
+                `
             }
-            button = `<button onclick="showNextPage()">Show next page</button>`
-            document.getElementById('app').innerHTML = button + html
-                        
+            document.getElementById('app').innerHTML = `<ul>${html}</ul>` + buttons
+
         }
 
         //controller
-        function showNextPage(){
-            pageSize += 10
-            updateView(filterNumbers(numbersList, pageSize))
+        function updateVisibleItems(){
+            let startIndex = currentPage * pageSize
+            visibleItems = numbersList.slice(startIndex, startIndex + pageSize) 
+        }
+
+        function showNextPage() {
+            currentPage += 1
+            updateVisibleItems()
+            updateView()
+        }
+
+        function showPreviousPage() {
+            currentPage -= 1
+            updateVisibleItems()
+            updateView()
         }
 
 
-        function filterNumbers(numbers, maxNumber){
-            let filterdNumbersList = [];
-            for(let number of numbers){
-                if(number <= maxNumber){
-                    filterdNumbersList.push(number)
-                }
+
+        function generateNumberList(numberOfItems) {
+            let items = []
+            for (let i = 1; i < numberOfItems; i++) {
+                items.push(i);
             }
-            
-            return filterdNumbersList
+            return items
         }
-
-        
-
-
-        function generateNumberList(list){
-            for (let i = 1; i <= 150; i++) {
-            list.push(i);
-        }
-        return list
-    }
 
 
 
     </script>
 </body>
+
 </html>
