@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppgave 153B</title>
+</head>
+
+<body>
+
+    <div id="app">
+    </div>
+
+
+    <script>
+        //model
+        let numbersList = generateNumberList(125);
+        let pageSize = 10;
+        let currentPage = 0;
+        let visibleItems = numbersList.slice(0, pageSize);
+        let filterEven = false;
+        let filterOdd = false;
+
+        //view
+        updateView()
+        function updateView() {
+            let html = '';
+            let buttons = '';
+
+            for (let i = 1; i <= Math.ceil(numbersList.length / pageSize); i++) {
+                buttons += `<button onclick="showPage(${i})">${i}</button>`
+            }
+
+            for (let number of visibleItems) {
+                html += /*HTML*/ `
+                <li>${number + 1}</li>`
+            }
+            document.getElementById('app').innerHTML = `<ul>${html}</ul>` + `<div>${buttons}</div>` +
+                `<button onclick="filterEvenNumbers()">Even Numbers</button>` +
+                `<button onclick="filterOddNumbers()">Odd Numbers</button>` +
+                `<button onclick="showAllNumbers()">Show All Numbers</button>`;
+
+        }
+
+        //controller
+        function filterEvenNumbers() {
+            filterEven = true
+            filterOdd = false
+            updateVisibleItems()
+            updateView()
+        }
+        function filterOddNumbers() {
+            filterOdd = true
+            filterEven = false
+            updateVisibleItems()
+            updateView()
+        }
+
+        function showAllNumbers() {
+            filterOdd = false
+            filterEven = false
+            updateVisibleItems()
+            updateView()
+        }
+
+        function updateVisibleItems() {
+            let startIndex = currentPage * pageSize
+            let endIndex = startIndex + pageSize
+            visibleItems = []
+
+            for (let i = startIndex; i < endIndex; i++) {
+                let item = numbersList[i];
+                if (!filterEven && !filterOdd) {
+                    visibleItems.push(item);
+                } else if (filterEven && item % 2 == 0) {
+                    visibleItems.push(item);
+                } else if (filterOdd && item % 2 != 0) {
+                    visibleItems.push(item);
+                }
+            }
+        }
+
+        function showPage(pageIndex) {
+            currentPage = pageIndex - 1
+            updateVisibleItems()
+            updateView()
+        }
+
+        function generateNumberList(numberOfItems) {
+            let items = []
+            for (let i = 0; i < numberOfItems; i++) {
+                items.push(i);
+            }
+            return items
+        }
+
+
+
+    </script>
+</body>
+
+</html>
