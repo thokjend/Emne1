@@ -18,7 +18,7 @@
         border: 1px solid gray;
       }
       .yellow {
-        background-color: rgb(211, 214, 50);
+        background-color: yellow;
       }
       .green {
         background-color: green;
@@ -52,27 +52,27 @@
         let decrease = startValue - 8;
         if (change == 1) {
           for (let i = startValue; i <= increase; i++) {
-            if (getLadderFrom(i) > i) {
-              html += `<div class="green">${i}</div>`;
-            } else {
-              html += `<div class="yellow">${i}</div>`;
-            }
+            html += checkGreen(i);
           }
         }
         if (change == -1) {
           for (let i = startValue; i >= decrease; i--) {
-            if (getLadderFrom(i) > i) {
-              html += `<div class="green">${i}</div>`;
-            } else {
-              html += `<div class="yellow">${i}</div>`;
-            }
+            html += checkGreen(i);
           }
         }
 
         document.getElementById("container").innerHTML += html;
       }
 
-      function checkGreen() {}
+      function checkGreen(index) {
+        let html = "";
+        if (getLadderFrom(index) > index) {
+          html += `<div class="green">${index}</div>`;
+        } else {
+          html += `<div class="yellow">${index}</div>`;
+        }
+        return html;
+      }
 
       function getLadderFrom(squareNo) {
         if (squareNo == 1) {
