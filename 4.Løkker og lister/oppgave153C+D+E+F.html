@@ -1,68 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Oppgave 153C/D/E/F</title>
     <style>
-        #app{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+      #app {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
 
-        input{
-            width: 500px;
-            margin-top: 50px;
-            font-size: 2em;
-            font-weight: bold;
-        }
-        button{
-            margin-top: 20px;
-            width: 250px;
-            height: 50px;
-            font-size: 1em;
-            font-weight: bolder;
-            background-color: rgb(23, 23, 83);
-            color: aliceblue;
-            cursor: pointer;
-        }
-        #output{
-            margin: 20px;
-            width: 100%;
-            height: 50px;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            align-items: center;
-            font-size: 2em;
-            font-weight: bolder;
-        }
-
-
+      input {
+        width: 500px;
+        margin-top: 50px;
+        font-size: 2em;
+        font-weight: bold;
+      }
+      button {
+        margin-top: 20px;
+        width: 250px;
+        height: 50px;
+        font-size: 1em;
+        font-weight: bolder;
+        background-color: rgb(23, 23, 83);
+        color: aliceblue;
+        cursor: pointer;
+      }
+      #output {
+        margin: 20px;
+        width: 100%;
+        height: 50px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        font-size: 2em;
+        font-weight: bolder;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
-    <div id="app">
-    </div>
+  <body>
+    <div id="app"></div>
 
     <script>
-        //model
-        let alphabet =   'ABCDEFGHIJKLMOPQRSTUVWXYZÆØÅ'
-        let secretCode = 'ÅØÆYUOIEABCDFGHJKLMPQRSTVWXZ'
-        let text = ''
-        let output = ''
-        let randomCode = ''
+      //model
+      let alphabet = "ABCDEFGHIJKLMOPQRSTUVWXYZÆØÅ";
+      let secretCode = "ÅØÆYUOIEABCDFGHJKLMPQRSTVWXZ";
+      let text = "";
+      let output = "";
+      let randomCode = "";
 
-        //view
-        randomizedCode()
-        updateView()
-        function updateView() {
-            document.getElementById('app').innerHTML = /*HTML*/`
+      //view
+      randomizedCode();
+      updateView();
+      function updateView() {
+        document.getElementById("app").innerHTML = /*HTML*/ `
             <input value="${text}" onchange="text=this.value.toUpperCase()" type="text">
             <div>
                 <button onclick='encryptText()'>Encrypt Text</button>
@@ -71,49 +66,44 @@
             <div id="output">
                 <div>Output:${output}</div>
             </div>
-            `
+            `;
+      }
+
+      //controller
+
+      function randomizedCode() {
+        randomCode = alphabet
+          .split("")
+          .sort((a, b) => 0.5 - Math.random())
+          .join("");
+      }
+
+      function transformText(inputText, code, action) {
+        let transformedText = "";
+        inputText = inputText.toUpperCase();
+
+        for (let i = 0; i < text.length; i++) {
+          if (action == "encrypt") {
+            let index = alphabet.indexOf([inputText[i]]);
+            transformedText += secretCode[index];
+          } else if (action == "decrypt") {
+            let index = code.indexOf([inputText[i]]);
+            transformedText += alphabet[index];
+          }
         }
 
-        //controller
-        
-        function randomizedCode(){
-            randomCode = alphabet.split('').sort((a, b) => 0.5 - Math.random()).join('');   
-        }
+        return transformedText;
+      }
 
-        function transformText(inputText, code, action){
-            let transformedText = '';
-            inputText = inputText.toUpperCase();
+      function encryptText() {
+        output = transformText(text, secretCode, "encrypt");
+        updateView();
+      }
 
-            for (let i = 0; i < text.length; i++){
-                if(action == 'encrypt'){
-                    let index = alphabet.indexOf([inputText[i]])
-                    transformedText += secretCode[index]
-                }
-                else if(action == 'decrypt'){
-                    let index = code.indexOf([inputText[i]])
-                    transformedText += alphabet[index]
-                }
-            }
-            
-            return transformedText
-        }
-
-
-
-        function encryptText() {
-            output = transformText(text, secretCode, 'encrypt');
-            updateView()
-        }
-
-        function decryptText(){
-            output = transformText(text, secretCode, 'decrypt');
-            updateView()
-
-        }   
-
-
-
+      function decryptText() {
+        output = transformText(text, secretCode, "decrypt");
+        updateView();
+      }
     </script>
-</body>
-
+  </body>
 </html>

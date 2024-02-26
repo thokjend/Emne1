@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Teamoppgave 4</title>
+    <style>
+      #container {
+        height: 750px;
+        display: grid;
+        grid-template-columns: repeat(9, 75px);
+        grid-template-rows: repeat(9, 75px);
+      }
+      #container > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid gray;
+        background-color: rgb(211, 214, 50);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container"></div>
+
+    <script>
+      createBoard();
+      function createBoard() {
+        createRow(90, -1);
+        createRow(73, 1);
+        createRow(72, -1);
+        createRow(55, 1);
+        createRow(54, -1);
+        createRow(37, 1);
+        createRow(36, -1);
+        createRow(19, 1);
+        createRow(18, -1);
+        createRow(1, 1);
+      }
+
+      function createRow(startValue, change) {
+        let html = "";
+        let increase = startValue + 8;
+        let decrease = startValue - 8;
+        if (change == 1) {
+          for (let i = startValue; i <= increase; i++) {
+            html += `<div>${i}</div>`;
+          }
+        }
+        if (change == -1) {
+          for (let i = startValue; i >= decrease; i--) {
+            html += `<div>${i}</div>`;
+          }
+        }
+        document.getElementById("container").innerHTML += html;
+      }
+
+      /*
+      let numberList = generateNumberList(90);
+
+      createRow();
+      function createRow() {
+        let html = "";
+        for (let i = 0; i < numberList.length; i++) {
+          html += `<div>${numberList[i]}</div>`;
+        }
+
+        document.getElementById("container").innerHTML = html;
+      }
+
+      function generateNumberList(numberOfItems) {
+        let items = [];
+        for (let i = 1; i <= numberOfItems; i++) {
+          items.push(i);
+        }
+        return items;
+      }
+      */
+    </script>
+  </body>
+</html>
