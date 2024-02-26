@@ -16,7 +16,15 @@
         justify-content: center;
         align-items: center;
         border: 1px solid gray;
+      }
+      .yellow {
         background-color: rgb(211, 214, 50);
+      }
+      .green {
+        background-color: green;
+      }
+      .red {
+        background-color: red;
       }
     </style>
   </head>
@@ -44,15 +52,60 @@
         let decrease = startValue - 8;
         if (change == 1) {
           for (let i = startValue; i <= increase; i++) {
-            html += `<div>${i}</div>`;
+            if (getLadderFrom(i) > i) {
+              html += `<div class="green">${i}</div>`;
+            } else {
+              html += `<div class="yellow">${i}</div>`;
+            }
           }
         }
         if (change == -1) {
           for (let i = startValue; i >= decrease; i--) {
-            html += `<div>${i}</div>`;
+            if (getLadderFrom(i) > i) {
+              html += `<div class="green">${i}</div>`;
+            } else {
+              html += `<div class="yellow">${i}</div>`;
+            }
           }
         }
+
         document.getElementById("container").innerHTML += html;
+      }
+
+      function checkGreen() {}
+
+      function getLadderFrom(squareNo) {
+        if (squareNo == 1) {
+          return 40;
+        } else if (squareNo == 8) {
+          return 10;
+        } else if (squareNo == 36) {
+          return 52;
+        } else if (squareNo == 43) {
+          return 62;
+        } else if (squareNo == 49) {
+          return 79;
+        } else if (squareNo == 65) {
+          return 82;
+        } else if (squareNo == 68) {
+          return 85;
+        } else if (squareNo == 87) {
+          return 70;
+        } else if (squareNo == 74) {
+          return 12;
+        } else if (squareNo == 64) {
+          return 27;
+        } else if (squareNo == 56) {
+          return 37;
+        } else if (squareNo == 42) {
+          return 30;
+        } else if (squareNo == 33) {
+          return 3;
+        } else if (squareNo == 24) {
+          return 5;
+        } else {
+          return null;
+        }
       }
 
       /*
