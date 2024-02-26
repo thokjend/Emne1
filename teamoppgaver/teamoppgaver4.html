@@ -72,19 +72,19 @@
         let decrease = startValue - 8;
         if (change == 1) {
           for (let i = startValue; i <= increase; i++) {
-            html += checkSquare(i);
+            html += createSquare(i);
           }
         }
         if (change == -1) {
           for (let i = startValue; i >= decrease; i--) {
-            html += checkSquare(i);
+            html += createSquare(i);
           }
         }
 
         return html;
       }
 
-      function checkSquare(index) {
+      function createSquare(index) {
         let endPositionUp = [10, 40, 52, 62, 79, 82, 85];
         let endPositionDown = [3, 5, 12, 27, 30, 37, 70];
         let html = "";
