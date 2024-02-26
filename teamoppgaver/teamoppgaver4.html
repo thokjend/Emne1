@@ -52,25 +52,31 @@
         let decrease = startValue - 8;
         if (change == 1) {
           for (let i = startValue; i <= increase; i++) {
-            html += checkGreen(i);
+            html += checkSquare(i);
           }
         }
         if (change == -1) {
           for (let i = startValue; i >= decrease; i--) {
-            html += checkGreen(i);
+            html += checkSquare(i);
           }
         }
 
         document.getElementById("container").innerHTML += html;
       }
 
-      function checkGreen(index) {
+      function checkSquare(index) {
         let html = "";
         if (getLadderFrom(index) > index) {
-          html += `<div class="green">${index}</div>`;
+          html = `<div class="green">${index}</div>`;
         } else {
-          html += `<div class="yellow">${index}</div>`;
+          html = `<div class="yellow">${index}</div>`;
         }
+
+        /*       let html =
+               getLadderFrom(index) > index
+                 ? `<div class="green">${index}</div>`
+                 : `<div class="yellow">${index}</div>`;
+      */
         return html;
       }
 
@@ -109,26 +115,26 @@
       }
 
       /*
-      let numberList = generateNumberList(90);
+           let numberList = generateNumberList(90);
 
-      createRow();
-      function createRow() {
-        let html = "";
-        for (let i = 0; i < numberList.length; i++) {
-          html += `<div>${numberList[i]}</div>`;
-        }
+           createRow();
+           function createRow() {
+             let html = "";
+             for (let i = 0; i < numberList.length; i++) {
+               html += `<div>${numberList[i]}</div>`;
+             }
 
-        document.getElementById("container").innerHTML = html;
-      }
+             document.getElementById("container").innerHTML = html;
+           }
 
-      function generateNumberList(numberOfItems) {
-        let items = [];
-        for (let i = 1; i <= numberOfItems; i++) {
-          items.push(i);
-        }
-        return items;
-      }
-      */
+           function generateNumberList(numberOfItems) {
+             let items = [];
+             for (let i = 1; i <= numberOfItems; i++) {
+               items.push(i);
+             }
+             return items;
+           }
+           */
     </script>
   </body>
 </html>
