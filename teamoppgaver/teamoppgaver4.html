@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Teamoppgave 4</title>
     <style>
-      #container {
+      #container > .board {
         height: 750px;
         display: grid;
         grid-template-columns: repeat(9, 75px);
         grid-template-rows: repeat(9, 75px);
       }
-      #container > div {
+      #container > .board > div {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -26,24 +26,44 @@
       .red {
         background-color: red;
       }
+      .gray {
+        background-color: rgb(159, 197, 187);
+      }
+      .pink {
+        background-color: pink;
+      }
+      button {
+        margin-top: 20px;
+      }
     </style>
   </head>
   <body>
     <div id="container"></div>
 
     <script>
+      let currentSquareNo = 0;
+
       createBoard();
       function createBoard() {
-        createRow(90, -1);
-        createRow(73, 1);
-        createRow(72, -1);
-        createRow(55, 1);
-        createRow(54, -1);
-        createRow(37, 1);
-        createRow(36, -1);
-        createRow(19, 1);
-        createRow(18, -1);
-        createRow(1, 1);
+        document.getElementById("container").innerHTML =
+          /*HTML*/
+          `<div class="board">` +
+          createRow(90, -1) +
+          createRow(73, 1) +
+          createRow(72, -1) +
+          createRow(55, 1) +
+          createRow(54, -1) +
+          createRow(37, 1) +
+          createRow(36, -1) +
+          createRow(19, 1) +
+          createRow(18, -1) +
+          createRow(1, 1) +
+          `</div>` +
+          `<button onclick="movePiece(1)">Move piece 1 step</button>`;
+      }
+
+      function movePiece(value) {
+        return;
       }
 
       function createRow(startValue, change) {
@@ -61,22 +81,25 @@
           }
         }
 
-        document.getElementById("container").innerHTML += html;
+        return html;
       }
 
       function checkSquare(index) {
+        let endPositionUp = [10, 40, 52, 62, 79, 82, 85];
+        let endPositionDown = [3, 5, 12, 27, 30, 37, 70];
         let html = "";
-        if (getLadderFrom(index) > index) {
+        let colorIndex = getLadderFrom(index);
+        if (endPositionUp.includes(index)) {
+          html = `<div class="gray">${index}</div>`;
+        } else if (endPositionDown.includes(index)) {
+          html = `<div class="pink">${index}</div>`;
+        } else if (colorIndex > index && colorIndex != null) {
           html = `<div class="green">${index}</div>`;
+        } else if (colorIndex < index && colorIndex != null) {
+          html = `<div class="red">${index}</div>`;
         } else {
           html = `<div class="yellow">${index}</div>`;
         }
-
-        /*       let html =
-               getLadderFrom(index) > index
-                 ? `<div class="green">${index}</div>`
-                 : `<div class="yellow">${index}</div>`;
-      */
         return html;
       }
 
@@ -113,28 +136,6 @@
           return null;
         }
       }
-
-      /*
-           let numberList = generateNumberList(90);
-
-           createRow();
-           function createRow() {
-             let html = "";
-             for (let i = 0; i < numberList.length; i++) {
-               html += `<div>${numberList[i]}</div>`;
-             }
-
-             document.getElementById("container").innerHTML = html;
-           }
-
-           function generateNumberList(numberOfItems) {
-             let items = [];
-             for (let i = 1; i <= numberOfItems; i++) {
-               items.push(i);
-             }
-             return items;
-           }
-           */
     </script>
   </body>
 </html>
