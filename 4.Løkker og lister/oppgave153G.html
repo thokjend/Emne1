@@ -7,18 +7,15 @@
   </head>
   <body>
     <script>
-      let testList = [1, 3, 2, 4, 3, 2, 4, 1, 0, 5];
+      let testList = [4, 3, 2, 1, 5, 0, 0, 0, 1, 2];
 
-      frequencyTable(testList);
       function frequencyTable(list) {
-        let sortedList = list.sort();
-        let newList = [];
+        let length = Math.max(...list) + 1;
+        let frequencyList = new Array(length).fill(0);
         for (let number of list) {
-          if (newList.includes(number) == false) {
-            newList.push(number);
-          }
+          frequencyList[number]++;
         }
-        return newList;
+        return frequencyList;
       }
     </script>
   </body>
