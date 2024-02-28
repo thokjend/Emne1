@@ -51,6 +51,7 @@
     <script>
       let currentSquareNo = 0;
       let player = "♖";
+      let dices = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
 
       createBoard();
       function createBoard() {
@@ -68,13 +69,23 @@
           createRow(18, -1) +
           createRow(1, 1) +
           `</div>` +
-          `<button onclick="movePiece(1)">Move piece 1 step</button>`;
+          `<button onclick="movePiece()">Throw Dice</button>`;
       }
 
-      function movePiece(value) {
-        if (currentSquareNo + value <= 90) {
-          currentSquareNo += value;
-          createBoard();
+      function movePiece() {
+        let index = Math.floor(Math.random() * 6) + 1;
+        if (currentSquareNo + index <= 90) {
+          currentSquareNo += index;
+        }
+
+        ladders(currentSquareNo);
+        createBoard();
+      }
+
+      function ladders(value) {
+        let colorIndex = getLadderFrom(value);
+        if (colorIndex != null) {
+          currentSquareNo = colorIndex;
         }
       }
 
@@ -102,6 +113,7 @@
         let html = "";
         let colorIndex = getLadderFrom(index);
         let backgroundColor = "";
+
         if (endPositionUp.includes(index)) {
           backgroundColor = "gray";
         } else if (endPositionDown.includes(index)) {
@@ -114,11 +126,10 @@
           backgroundColor = "yellow";
         }
 
-        if (index == currentSquareNo) {
-          html = `<div class="${backgroundColor}"><span>${player}</span></div>`;
-        } else {
-          html = `<div class="${backgroundColor}">${index}</div>`;
-        }
+        html =
+          index == currentSquareNo
+            ? `<div class="${backgroundColor}"><span>${player}</span></div>`
+            : `<div class="${backgroundColor}">${index}</div>`;
 
         return html;
       }
