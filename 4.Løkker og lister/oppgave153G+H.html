@@ -7,7 +7,9 @@
   </head>
   <body>
     <script>
-      let testList = [4, 3, 2, 1, 5, 0, 0, 0, 1, 2];
+      let testList = [4, 3, 2, 1, 2, 3, 3, 4, 1, 2, 3];
+      let newList = frequencyTable(testList);
+      let mode = findMode(newList);
 
       function frequencyTable(list) {
         let length = Math.max(...list) + 1;
@@ -17,6 +19,20 @@
         }
         return frequencyList;
       }
+
+      function findMode(list) {
+        let mode = 0;
+        let maxFrequency = 0;
+        for (let i = 0; i < list.length; i++) {
+          if (list[i] > maxFrequency) {
+            maxFrequency = list[i];
+            mode = i;
+          }
+        }
+        return mode;
+      }
+      console.log("List:", testList);
+      console.log("Mode:", mode);
     </script>
   </body>
 </html>
