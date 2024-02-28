@@ -7,7 +7,33 @@
   </head>
   <body>
     <script>
-      let testList = [1, 1, 4, 5, 5];
+      let yatzyDices = [2, 2, 3, 3, 4];
+      let frequencyList = frequencyTable(yatzyDices);
+      let mode = findMode(frequencyList);
+
+      function frequencyTable(list) {
+        let length = Math.max(...list) + 1;
+        let frequencyList = new Array(length).fill(0);
+        for (let number of list) {
+          frequencyList[number]++;
+        }
+        return frequencyList.slice(1);
+      }
+
+      function findMode(list) {
+        let maxFrequency = 0;
+        let mode = 0;
+        for (let i = 0; i < list.length; i++) {
+          if (list[i] >= maxFrequency) {
+            maxFrequency = list[i];
+            mode = i + 1;
+          }
+        }
+        return mode;
+      }
+
+      console.log("Dices", yatzyDices);
+      console.log("Pair of", mode);
     </script>
   </body>
 </html>

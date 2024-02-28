@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oppgave 153J</title>
+  </head>
+  <body>
+    <script>
+      let yatzyDices = [2, 3, 1, 4, 5];
+      let frequencyList = frequencyTable(yatzyDices);
+      let checkStraight = checkIfStraight(frequencyList);
+
+      function frequencyTable(list) {
+        let length = Math.max(...list) + 1;
+        let frequencyList = new Array(length).fill(0);
+        for (let number of list) {
+          frequencyList[number]++;
+        }
+        return frequencyList.slice(1);
+      }
+
+      function checkIfStraight(list) {
+        let littleStraight = [1, 1, 1, 1, 1];
+        let bigStraight = [0, 1, 1, 1, 1, 1];
+        let isLittleStraight = true;
+        let isBigStraight = true;
+        for (let i = 0; i < list.length; i++) {
+          if (list[i] !== littleStraight[i]) {
+            isLittleStraight = false;
+          }
+          if (list[i] !== bigStraight[i]) {
+            isBigStraight = false;
+          }
+        }
+        if (isLittleStraight) {
+          console.log("Has little straight (1,2,3,4,5)");
+        } else if (isBigStraight) {
+          console.log("Has big straight (2,3,4,5,6)");
+        } else {
+          console.log("No straight");
+        }
+      }
+    </script>
+  </body>
+</html>
