@@ -32,10 +32,7 @@
       .pink {
         background-color: pink;
       }
-      button {
-        margin-top: 20px;
-      }
-      span {
+      #player {
         height: 50px;
         width: 50px;
         font-size: 3em;
@@ -43,16 +40,43 @@
         justify-content: center;
         align-items: center;
       }
+      button {
+        width: 250px;
+        height: 50px;
+        border-radius: 50px;
+        font-size: 2em;
+        background-color: rgb(58, 58, 140);
+        color: aliceblue;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: rgb(43, 43, 103);
+      }
+
+      #resultContainer {
+        margin-top: 30px;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        max-width: 675px;
+        height: 100px;
+      }
+      #diceResult {
+        font-size: 5em;
+      }
     </style>
   </head>
   <body>
     <div id="container"></div>
 
     <script>
+      //model
       let currentSquareNo = 0;
       let player = "♖";
       let dices = ["⚀", "⚁", "⚂", "⚃", "⚄", "⚅"];
+      let diceRoll = "";
 
+      //view
       createBoard();
       function createBoard() {
         document.getElementById("container").innerHTML =
@@ -69,24 +93,10 @@
           createRow(18, -1) +
           createRow(1, 1) +
           `</div>` +
-          `<button onclick="movePiece()">Throw Dice</button>`;
-      }
-
-      function movePiece() {
-        let index = Math.floor(Math.random() * 6) + 1;
-        if (currentSquareNo + index <= 90) {
-          currentSquareNo += index;
-        }
-
-        ladders(currentSquareNo);
-        createBoard();
-      }
-
-      function ladders(value) {
-        let colorIndex = getLadderFrom(value);
-        if (colorIndex != null) {
-          currentSquareNo = colorIndex;
-        }
+          `<div id="resultContainer">
+            <button onclick="movePiece()">Throw Dice</button>
+            <span id="diceResult">${dices[diceRoll] ?? ""}</span>
+          </div>`;
       }
 
       function createRow(startValue, change) {
@@ -128,7 +138,7 @@
 
         html =
           index == currentSquareNo
-            ? `<div class="${backgroundColor}"><span>${player}</span></div>`
+            ? `<div class="${backgroundColor}"><span id="player">${player}</span></div>`
             : `<div class="${backgroundColor}">${index}</div>`;
 
         return html;
@@ -165,6 +175,24 @@
           return 5;
         } else {
           return null;
+        }
+      }
+      //controller
+      function movePiece() {
+        diceRoll = Math.floor(Math.random() * 6);
+        let index = diceRoll + 1;
+        if (currentSquareNo + index <= 90) {
+          currentSquareNo += index;
+        }
+
+        ladders(currentSquareNo);
+        createBoard();
+      }
+
+      function ladders(value) {
+        let colorIndex = getLadderFrom(value);
+        if (colorIndex != null) {
+          currentSquareNo = colorIndex;
         }
       }
     </script>
