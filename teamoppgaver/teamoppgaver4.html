@@ -64,7 +64,10 @@
       }
 
       function movePiece(value) {
-        return;
+        if (currentSquareNo + value <= 90) {
+          currentSquareNo += value;
+          createBoard(); // Re-render the board with the updated position
+        }
       }
 
       function createRow(startValue, change) {
@@ -98,6 +101,8 @@
           html = `<div class="green">${index}</div>`;
         } else if (colorIndex < index && colorIndex != null) {
           html = `<div class="red">${index}</div>`;
+        } else if (index === currentSquareNo) {
+          html = `<div class="yellow">${player}</div>`;
         } else {
           html = `<div class="yellow">${index}</div>`;
         }
