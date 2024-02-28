@@ -35,6 +35,14 @@
       button {
         margin-top: 20px;
       }
+      span {
+        height: 50px;
+        width: 50px;
+        font-size: 3em;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     </style>
   </head>
   <body>
@@ -66,7 +74,7 @@
       function movePiece(value) {
         if (currentSquareNo + value <= 90) {
           currentSquareNo += value;
-          createBoard(); // Re-render the board with the updated position
+          createBoard();
         }
       }
 
@@ -93,19 +101,25 @@
         let endPositionDown = [3, 5, 12, 27, 30, 37, 70];
         let html = "";
         let colorIndex = getLadderFrom(index);
+        let backgroundColor = "";
         if (endPositionUp.includes(index)) {
-          html = `<div class="gray">${index}</div>`;
+          backgroundColor = "gray";
         } else if (endPositionDown.includes(index)) {
-          html = `<div class="pink">${index}</div>`;
+          backgroundColor = "pink";
         } else if (colorIndex > index && colorIndex != null) {
-          html = `<div class="green">${index}</div>`;
+          backgroundColor = "green";
         } else if (colorIndex < index && colorIndex != null) {
-          html = `<div class="red">${index}</div>`;
-        } else if (index === currentSquareNo) {
-          html = `<div class="yellow">${player}</div>`;
+          backgroundColor = "red";
         } else {
-          html = `<div class="yellow">${index}</div>`;
+          backgroundColor = "yellow";
         }
+
+        if (index == currentSquareNo) {
+          html = `<div class="${backgroundColor}"><span>${player}</span></div>`;
+        } else {
+          html = `<div class="${backgroundColor}">${index}</div>`;
+        }
+
         return html;
       }
 
