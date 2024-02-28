@@ -16,6 +16,7 @@
         justify-content: center;
         align-items: center;
         border: 1px solid gray;
+        text-align: center;
       }
       .yellow {
         background-color: yellow;
@@ -168,6 +169,8 @@
         let html = "";
         let colorIndex = getLadderFrom(index);
         let backgroundColor = "";
+        let greenIndex = "";
+        let redIndex = "";
 
         if (endPositionUp.includes(index)) {
           backgroundColor = "gray";
@@ -175,8 +178,10 @@
           backgroundColor = "pink";
         } else if (colorIndex > index && colorIndex != null) {
           backgroundColor = "green";
+          greenIndex = index + `</br>` + "to ladder" + `</br>` + colorIndex;
         } else if (colorIndex < index && colorIndex != null) {
           backgroundColor = "red";
+          redIndex = index + `</br>` + "to ladder" + `</br>` + colorIndex;
         } else {
           backgroundColor = "yellow";
         }
@@ -184,7 +189,13 @@
         html =
           index == currentSquareNo
             ? `<div class="${backgroundColor}"><span id="player">${player}</span></div>`
-            : `<div class="${backgroundColor}">${index}</div>`;
+            : `<div class="${backgroundColor}">${
+                greenIndex != ""
+                  ? greenIndex
+                  : redIndex != ""
+                  ? redIndex
+                  : index
+              }</div>`;
 
         return html;
       }
