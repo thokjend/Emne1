@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oppgave 171C</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      let color1 = { red: 50, green: 25, blue: 135 };
+      let color2 = { red: 35, green: 55, blue: 3 };
+
+      updateView();
+      function updateView() {
+        let div = averageOfTwoColors(color1, color2);
+
+        document.getElementById("app").innerHTML = div;
+      }
+
+      function averageOfTwoColors(color1, color2) {
+        let averageRed = (color1.red + color2.red) / 2;
+        let averageGreen = (color1.green + color2.green) / 2;
+        let averageBlue = (color1.blue + color2.blue) / 2;
+        return `<div style="background-color: rgb(${averageRed}, ${averageGreen}, ${averageBlue}); width: 50px; height: 50px""></div>`;
+      }
+    </script>
+  </body>
+</html>

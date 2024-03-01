@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oppgave 171A</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      let currentColor = { red: 100, green: 200, blue: 50 };
+
+      updateView();
+      function updateView() {
+        let html = createDiv(currentColor);
+        document.getElementById("app").innerHTML = html;
+      }
+
+      function createDiv(object) {
+        let color1 = object.red;
+        let color2 = object.green;
+        let color3 = object.blue;
+        return `<div style="background-color: rgb(${color1}, ${color2}, ${color3}); width: 50px; height: 50px""></div>`;
+      }
+    </script>
+  </body>
+</html>

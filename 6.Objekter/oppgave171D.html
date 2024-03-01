@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oppgave 171D</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      let red = { red: 255, green: 0, blue: 0 };
+
+      updateView();
+      function updateView() {
+        let html = "";
+        let getColorList = getListOfColors(red);
+        for (let i = 0; i < getColorList.length; i++) {
+          html += createDivWithCurrentColor(getColorList[i]);
+        }
+
+        document.getElementById("app").innerHTML = html;
+      }
+
+      function createDivWithCurrentColor(object) {
+        let color1 = object.red;
+        let color2 = object.green;
+        let color3 = object.blue;
+        return `<div style="background-color: rgb(${color1}, ${color2}, ${color3}); width: 50px; height: 50px""></div>`;
+      }
+
+      function invertedColor(object) {
+        let inverseRed = 255 - object.red;
+        let inverseGreen = 255 - object.green;
+        let inverseBlue = 255 - object.blue;
+        return { red: inverseRed, green: inverseGreen, blue: inverseBlue };
+      }
+
+      function averageOfTwoColors(color1, color2) {
+        let averageRed = (color1.red + color2.red) / 2;
+        let averageGreen = (color1.green + color2.green) / 2;
+        let averageBlue = (color1.blue + color2.blue) / 2;
+        return { red: averageRed, green: averageGreen, blue: averageBlue };
+      }
+
+      function getListOfColors(color) {
+        let colorList = [];
+        let color1 = color;
+        let color5 = invertedColor(color);
+        let color3 = averageOfTwoColors(color, color5);
+        let color2 = averageOfTwoColors(color, color3);
+        let color4 = averageOfTwoColors(color3, color5);
+        colorList.push(color1, color2, color3, color4, color5);
+
+        return colorList;
+      }
+    </script>
+  </body>
+</html>
