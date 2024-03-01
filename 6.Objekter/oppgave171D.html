@@ -22,25 +22,25 @@
         document.getElementById("app").innerHTML = html;
       }
 
-      function createDivWithCurrentColor(object) {
-        let color1 = object.red;
-        let color2 = object.green;
-        let color3 = object.blue;
+      function createDivWithCurrentColor(colorObject) {
+        let color1 = colorObject.red;
+        let color2 = colorObject.green;
+        let color3 = colorObject.blue;
         return `<div style="background-color: rgb(${color1}, ${color2}, ${color3}); width: 50px; height: 50px""></div>`;
       }
 
-      function invertedColor(object) {
-        let inverseRed = 255 - object.red;
-        let inverseGreen = 255 - object.green;
-        let inverseBlue = 255 - object.blue;
-        return { red: inverseRed, green: inverseGreen, blue: inverseBlue };
+      function invertedColor(rgbColor) {
+        let red = 255 - rgbColor.red;
+        let green = 255 - rgbColor.green;
+        let blue = 255 - rgbColor.blue;
+        return { red, green, blue };
       }
 
       function averageOfTwoColors(color1, color2) {
-        let averageRed = (color1.red + color2.red) / 2;
-        let averageGreen = (color1.green + color2.green) / 2;
-        let averageBlue = (color1.blue + color2.blue) / 2;
-        return { red: averageRed, green: averageGreen, blue: averageBlue };
+        let red = (color1.red + color2.red) / 2;
+        let green = (color1.green + color2.green) / 2;
+        let blue = (color1.blue + color2.blue) / 2;
+        return { red, green, blue };
       }
 
       function getListOfColors(color) {
