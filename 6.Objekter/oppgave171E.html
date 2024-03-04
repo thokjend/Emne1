@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oppgave 171E</title>
+  </head>
+  <body>
+    <div id="app"></div>
+
+    <script>
+      let word = "";
+      let listOfWords = [];
+      let wordCounts = {};
+
+      updateView();
+      function updateView() {
+        let result = "";
+        for (let word in wordCounts) {
+          result += `<div>${word}: ${wordCounts[word]}</div>`;
+        }
+        let textarea = `<textarea value="${word}" onchange="word=this.value" cols="30" rows="10"></textarea>`;
+        let submitButton = `<button onclick="countWords()">Count words</button>`;
+        document.getElementById("app").innerHTML = /*HTML*/ `
+        ${textarea}
+        <br/>
+        ${submitButton}
+        <br/>
+        ${result}
+        `;
+
+        word = "";
+        listOfWords = [];
+        wordCounts = {};
+      }
+
+      function countWords() {
+        listOfWords = word.split(" ");
+
+        for (let word in listOfWords) {
+          if (wordCounts[listOfWords[word]]) {
+            wordCounts[listOfWords[word]]++;
+          } else {
+            wordCounts[listOfWords[word]] = 1;
+          }
+        }
+
+        updateView();
+      }
+    </script>
+  </body>
+</html>
