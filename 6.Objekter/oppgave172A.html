@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Oppgave 172</title>
+    <style>
+      table,
+      tr,
+      td,
+      th {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+
+      td,
+      th {
+        padding: 10px;
+      }
+      td {
+        font-size: 1em;
+        font-weight: bold;
+      }
+
+      th {
+        background-color: rgb(98, 98, 172);
+        font-size: 2em;
+      }
+      #inputContainer {
+        padding-top: 20px;
+      }
+      #box1 {
+        padding-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      //model
+      let inputValue = "";
+      let responsibility = "";
+      let tasks = [
+        {
+          text: "Make header for website",
+          doneDate: "",
+          responsible: "Bob",
+          isDone: false,
+        },
+        {
+          text: "Style body for website",
+          doneDate: "",
+          responsible: "Per",
+          isDone: false,
+        },
+        {
+          text: "Unit test controller functions",
+          doneDate: "",
+          responsible: "Jan",
+          isDone: true,
+        },
+      ];
+
+      //view
+      updateView();
+      function updateView() {
+        let date = new Date();
+        let dateText = date.toISOString().slice(0, 10);
+        let html = `<tr>
+                          <th>Task</th>
+                          <th>Date</th>
+                          <th>Responsible</th>
+                          <th>Done</th>
+                          <th></th>
+                     </tr>`;
+        for (let i = 0; i < tasks.length; i++) {
+          const task = tasks[i];
+          const checkbox = task.isDone ? 'checked="checked"' : "";
+          const showDate = task.isDone ? dateText : "";
+
+          const showDateIfChecked = "a";
+          html += ` <tr>
+                          <td>${task.text}</td>
+                          <td>${showDate}</td>
+                          <td>${task.responsible}</td>
+                          <td><input type="checkbox" ${checkbox} onclick="changeState(${i})"></td>
+                          <td><button onclick="deleteTask(${i})">x</button></td>
+                      </tr>`;
+        }
+
+        document.getElementById("app").innerHTML = /*HTML*/ `
+          <table>${html}</table>
+          <div id="box1">
+            New task:
+              <input value ="${inputValue}" oninput="inputValue = this.value">
+            Responsible:
+              <input value ="${responsibility}" oninput="responsibility = this.value">
+              <button onclick="addTask()">Add task</button>
+          <div>
+          `;
+      }
+
+      function createHtml(task) {}
+
+      //controller
+      function changeState(index) {
+        const task = tasks[index];
+        task.isDone ? (task.isDone = false) : (task.isDone = true);
+        updateView();
+      }
+      function deleteTask(index) {
+        tasks.splice(index, 1);
+        updateView();
+      }
+
+      function addTask() {
+        if (inputValue == "" || responsibility == "") {
+          return;
+        }
+        tasks.push({
+          text: inputValue,
+          doneDate: "",
+          responsible: responsibility,
+          isDone: false,
+        });
+        inputValue = "";
+        responsibility = "";
+        updateView();
+      }
+    </script>
+  </body>
+</html>

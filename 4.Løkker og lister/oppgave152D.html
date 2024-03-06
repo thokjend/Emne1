@@ -1,74 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Oppgave 152D</title>
     <style>
-      #result{
+      #result {
         font-size: 20px;
       }
     </style>
-</head>
+  </head>
 
-<body>
-
-    <div id="app">
-    </div>
-
+  <body>
+    <div id="app"></div>
 
     <script>
-        //model
-        let text = ''
-        let listOfWords;
-        let words = []
-        let wordCounts = []
-        const allValidCharacters = 'abcdefghijklmnopqrstuvwxyzøæåABCDEFGHIJKLMNOPQRSTUVWXYZØÆÅ '
-        //const letters = /^[A-Åa-åøæØÆ\s]+$/
+      //model
+      let text = "";
+      let listOfWords;
+      let words = [];
+      let wordCounts = [];
+      const allValidCharacters =
+        "abcdefghijklmnopqrstuvwxyzøæåABCDEFGHIJKLMNOPQRSTUVWXYZØÆÅ ";
+      //const letters = /^[A-Åa-åøæØÆ\s]+$/
 
-        //view
-        updateView()
-        function updateView() {
-            let result = '';
-            for (let i = 0; i < words.length; i++) {
-                result += `${words[i]}: ${wordCounts[i]} <br>`;
-            }
-            document.getElementById('app').innerHTML = /*HTML*/`
+      //view
+      updateView();
+      function updateView() {
+        let result = "";
+        for (let i = 0; i < words.length; i++) {
+          result += `${words[i]}: ${wordCounts[i]} <br>`;
+        }
+        document.getElementById("app").innerHTML = /*HTML*/ `
             <textarea value ="${text}" onchange="text = this.value"  cols="30" rows="10"></textarea>
             <br/>
             <button onclick="checkText()">clean text</button>
             <div> Word | Word Count:</div>
-            <div id='result'>${result || ''}</div>
-            `
-            words = []
-            wordCounts = []
+            <div id='result'>${result || ""}</div>
+            `;
+        words = [];
+        wordCounts = [];
+      }
+      //controller
+      function checkText() {
+        let cleanedText = "";
+        for (let i = 0; i < text.length; i++) {
+          if (allValidCharacters.includes(text[i])) {
+            cleanedText += text[i];
+          }
         }
-        //controller
-        function checkText() {
-            let cleanedText = ''
-            for (let i = 0; i < text.length; i++) {
-                if (allValidCharacters.includes(text[i])) {
-                    cleanedText += text[i]
-                }
-            }
-            listOfWords = cleanedText.split(' ')
-            
-            
-            for (let j = 0; j < listOfWords.length; j++) {
-                let index = words.indexOf(listOfWords[j]);
-                if (index != -1) {
-                    wordCounts[index]++;
-                } else {
-                    words.push(listOfWords[j]);
-                    wordCounts.push(1);
-                }
-            }
-        
-            updateView()
+        listOfWords = cleanedText.split(" ");
+
+        for (let j = 0; j < listOfWords.length; j++) {
+          let index = words.indexOf(listOfWords[j]);
+          if (index != -1) {
+            wordCounts[index]++;
+          } else {
+            words.push(listOfWords[j]);
+            wordCounts.push(1);
+          }
         }
 
+        updateView();
+      }
     </script>
-</body>
-
+  </body>
 </html>
