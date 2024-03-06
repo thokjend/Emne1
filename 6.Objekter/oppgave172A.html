@@ -41,6 +41,7 @@
       let inputValue = "";
       let editInputValue = "";
       let responsibility = "";
+      let editResponsibility = "";
       let tasks = [
         {
           text: "Make header for website",
@@ -109,7 +110,7 @@
         return ` <tr>
                     <td><input type="text" value="${task.text}" oninput="editInputValue = this.value"></td>
                     <td>${showDate}</td>
-                    <td>${task.responsible}</td>
+                    <td><input type="text" value="${task.responsible}" oninput="editResponsibility = this.value"></td>
                     <td><input type="checkbox" ${checkbox} onclick="changeState(${index})"></td>
                     <td>
                       <button onclick="updateTask(${index})">Save</button>
@@ -130,14 +131,17 @@
 
       function editTask(index) {
         tasks[index].editMode = true;
+        editResponsibility = tasks[index].responsible;
         editInputValue = tasks[index].text;
         updateView();
       }
       function updateTask(index) {
         let task = tasks[index];
         task.text = editInputValue;
+        task.responsible = editResponsibility;
         task.editMode = false;
         editInputValue = "";
+        editResponsibility = "";
         updateView();
       }
 
