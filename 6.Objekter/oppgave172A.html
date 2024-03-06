@@ -39,6 +39,7 @@
     <script>
       //model
       let inputValue = "";
+      let editInputValue = "";
       let responsibility = "";
       let tasks = [
         {
@@ -64,8 +65,6 @@
       //view
       updateView();
       function updateView() {
-        let date = new Date();
-        let dateText = date.toISOString().slice(0, 10);
         let html = `<tr>
                           <th>Task</th>
                           <th>Date</th>
@@ -74,17 +73,7 @@
                           <th></th>
                      </tr>`;
         for (let i = 0; i < tasks.length; i++) {
-          const task = tasks[i];
-          const checkbox = task.isDone ? 'checked="checked"' : "";
-          const showDate = task.isDone ? dateText : "";
-
-          html += ` <tr>
-                          <td>${task.text}</td>
-                          <td>${showDate}</td>
-                          <td>${task.responsible}</td>
-                          <td><input type="checkbox" ${checkbox} onclick="changeState(${i})"></td>
-                          <td><button onclick="deleteTask(${i})">x</button></td>
-                      </tr>`;
+          html += createHtml(i);
         }
 
         document.getElementById("app").innerHTML = /*HTML*/ `
@@ -100,7 +89,32 @@
       }
 
       function createHtml(index) {
-        return;
+        let date = new Date();
+        let dateText = date.toISOString().slice(0, 10);
+        const task = tasks[index];
+        const checkbox = task.isDone ? 'checked="checked"' : "";
+        const showDate = task.isDone ? dateText : "";
+        if (!task.editMode) {
+          return ` <tr>
+                    <td>${task.text}</td>
+                    <td>${showDate}</td>
+                    <td>${task.responsible}</td>
+                    <td><input type="checkbox" ${checkbox} onclick="changeState(${index})"></td>
+                    <td>
+                      <button onclick="deleteTask(${index})">Delete</button>
+                      <button onclick="editTask(${index})">Edit</button>
+                    </td>
+                </tr>`;
+        }
+        return ` <tr>
+                    <td><input type="text" value="${task.text}" oninput="editInputValue = this.value"></td>
+                    <td>${showDate}</td>
+                    <td>${task.responsible}</td>
+                    <td><input type="checkbox" ${checkbox} onclick="changeState(${index})"></td>
+                    <td>
+                      <button onclick="updateTask(${index})">Save</button>
+                    </td>
+                </tr>`;
       }
 
       //controller
@@ -111,6 +125,19 @@
       }
       function deleteTask(index) {
         tasks.splice(index, 1);
+        updateView();
+      }
+
+      function editTask(index) {
+        tasks[index].editMode = true;
+        editInputValue = tasks[index].text;
+        updateView();
+      }
+      function updateTask(index) {
+        let task = tasks[index];
+        task.text = editInputValue;
+        task.editMode = false;
+        editInputValue = "";
         updateView();
       }
 
