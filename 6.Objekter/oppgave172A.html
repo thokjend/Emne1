@@ -78,7 +78,6 @@
           const checkbox = task.isDone ? 'checked="checked"' : "";
           const showDate = task.isDone ? dateText : "";
 
-          const showDateIfChecked = "a";
           html += ` <tr>
                           <td>${task.text}</td>
                           <td>${showDate}</td>
@@ -100,7 +99,9 @@
           `;
       }
 
-      function createHtml(task) {}
+      function createHtml(index) {
+        return;
+      }
 
       //controller
       function changeState(index) {
