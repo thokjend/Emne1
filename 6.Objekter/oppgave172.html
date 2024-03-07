@@ -94,9 +94,15 @@
               <button onclick="addTask()">Add task</button>
               <select oninput="filterResponsible(this.value)" >
                 <option>Show All</option>
-                <option>Bob</option>
-                <option>Per</option>
-                <option>Jan</option>
+                <option ${
+                  filterResponsibility == "Bob" ? "selected" : ""
+                }>Bob</option>
+                <option ${
+                  filterResponsibility == "Per" ? "selected" : ""
+                }>Per</option>
+                <option ${
+                  filterResponsibility == "Jan" ? "selected" : ""
+                }>Jan</option>
               </select>
           <div>
           `;
@@ -134,7 +140,12 @@
       //controller
 
       function filterResponsible(value) {
-        filterResponsibility = value;
+        if (value == "Show All") {
+          filterResponsibility = "";
+        } else {
+          filterResponsibility = value;
+        }
+        updateView();
 
         updateView();
       }
