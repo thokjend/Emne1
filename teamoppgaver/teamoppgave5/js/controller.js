@@ -1,35 +1,33 @@
 function buyCoke() {
-  if (cokesInStore == 0) {
-    return;
-  }
   let totalInserted = valueFromCoinCounts(coinsInserted);
-  let cokeCost = 25;
-  let sum = totalInserted - cokeCost;
-
   if (totalInserted < 25) {
     return;
-  }
-
-  /*  if (sum >= 0) {
-    for (let i = 0; coinsInserted.length; i++) {
-      if (coinsInserted[3] != 0 && totalInserted >= 20) {
-        coinsInserted[3]--;
-        coinsInMachine[3]++;
-      } else if (coinsInserted[2] != 0 && totalInserted >= 10) {
-        coinsInserted[2]--;
-        coinsInMachine[2]++;
-      } else if (coinsInserted[1] != 0 && totalInserted >= 5) {
-        coinsInserted[1]--;
-        coinsInMachine[1]++;
-      } else if (coinsInserted[0] != 0 && totalInserted >= 1) {
-        coinsInserted[0]--;
-        coinsInMachine[0]++;
+  } else {
+    for (let i = 0; i < coinsInMachine.length; i++) {
+      coinsInMachine[i] += coinsInserted[i];
+      coinsInserted[i] = 0;
+    }
+    totalInserted -= 25;
+    let shouldBeReturned = totalInserted;
+    let theCoins = [20, 10, 5, 1];
+    let nowIndex = 0;
+    while (shouldBeReturned > 0) {
+      if (
+        theCoins[nowIndex] <= shouldBeReturned &&
+        coinsInMachine[3 - nowIndex] > 0
+      ) {
+        shouldBeReturned -= theCoins[nowIndex];
+        coinsInserted[3 - nowIndex] += 1;
+        coinsInMachine[3 - nowIndex] -= 1;
+      } else {
+        nowIndex += 1;
       }
     }
-  } */
+  }
 
+  if (cokesInStore <= 0) return;
   cokesInStore--;
-  isCokeInDelivery = true;
+  isCokeInDelivery++;
   updateView();
 }
 
@@ -39,21 +37,19 @@ function insertCoin(value) {
 }
 
 function returnCoins() {
-  if (valueFromCoinCounts(coinsInserted) == 0) {
-    return;
-  } else {
-    coinsReturned = [...coinsInserted];
-    coinsInserted = [0, 0, 0, 0];
-    updateView();
-  }
+  coinsReturned[0] += coinsInserted[0];
+  coinsReturned[1] += coinsInserted[1];
+  coinsReturned[2] += coinsInserted[2];
+  coinsReturned[3] += coinsInserted[3];
+  coinsInserted = [0, 0, 0, 0];
+  updateView();
 }
 
 function takeCoins() {
   coinsReturned = [0, 0, 0, 0];
   updateView();
 }
-
 function takeCoke() {
-  isCokeInDelivery = false;
+  isCokeInDelivery = 0;
   updateView();
 }
