@@ -161,6 +161,13 @@
         updateView();
       }
       function deleteTask(index) {
+        //incomplete
+        const task = tasks[index];
+
+        responsibilityList.splice(
+          responsibilityList.indexOf(task.responsible),
+          1
+        );
         tasks.splice(index, 1);
         updateView();
       }
@@ -172,6 +179,7 @@
         updateView();
       }
       function updateTask(index) {
+        //incomplete
         let task = tasks[index];
         task.text = editInputValue;
         task.responsible = editResponsibility;
