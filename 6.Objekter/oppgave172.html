@@ -42,6 +42,7 @@
       let editInputValue = "";
       let responsibility = "";
       let editResponsibility = "";
+      let filterResponsibility;
 
       let tasks = [
         {
@@ -75,7 +76,12 @@
                           <th></th>
                      </tr>`;
         for (let i = 0; i < tasks.length; i++) {
-          html += createHtml(i);
+          if (
+            !filterResponsibility ||
+            filterResponsibility == tasks[i].responsible
+          ) {
+            html += createHtml(i);
+          }
         }
 
         document.getElementById("app").innerHTML = /*HTML*/ `
@@ -86,6 +92,12 @@
             Responsible:
               <input value ="${responsibility}" oninput="responsibility = this.value">
               <button onclick="addTask()">Add task</button>
+              <select oninput="filterResponsible(this.value)" >
+                <option>Show All</option>
+                <option>Bob</option>
+                <option>Per</option>
+                <option>Jan</option>
+              </select>
           <div>
           `;
       }
@@ -97,7 +109,7 @@
         const checkbox = task.isDone ? 'checked="checked"' : "";
         const showDate = task.isDone ? dateText : "";
         if (!task.editMode) {
-          return ` <tr>
+          return /*HTML*/ ` <tr>
                     <td>${task.text}</td>
                     <td>${showDate}</td>
                     <td>${task.responsible}</td>
@@ -108,7 +120,7 @@
                     </td>
                 </tr>`;
         }
-        return ` <tr>
+        return /*HTML*/ ` <tr>
                     <td><input type="text" value="${task.text}" oninput="editInputValue = this.value"></td>
                     <td>${showDate}</td>
                     <td><input type="text" value="${task.responsible}" oninput="editResponsibility = this.value"></td>
@@ -120,6 +132,13 @@
       }
 
       //controller
+
+      function filterResponsible(value) {
+        filterResponsibility = value;
+
+        updateView();
+      }
+
       function changeState(index) {
         const task = tasks[index];
         task.isDone ? (task.isDone = false) : (task.isDone = true);
