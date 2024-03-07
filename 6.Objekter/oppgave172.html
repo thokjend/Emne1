@@ -43,6 +43,7 @@
       let responsibility = "";
       let editResponsibility = "";
       let filterResponsibility;
+      let responsibilityList = ["Bob", "Per", "Jan"];
 
       let tasks = [
         {
@@ -92,18 +93,8 @@
             Responsible:
               <input value ="${responsibility}" oninput="responsibility = this.value">
               <button onclick="addTask()">Add task</button>
-              <select oninput="filterResponsible(this.value)" >
-                <option>Show All</option>
-                <option ${
-                  filterResponsibility == "Bob" ? "selected" : ""
-                }>Bob</option>
-                <option ${
-                  filterResponsibility == "Per" ? "selected" : ""
-                }>Per</option>
-                <option ${
-                  filterResponsibility == "Jan" ? "selected" : ""
-                }>Jan</option>
-              </select>
+              ${createSelectMenu()}
+
           <div>
           `;
       }
@@ -138,6 +129,22 @@
       }
 
       //controller
+
+      // function that makes dropdown menu with the names in responsibilityList
+      function createSelectMenu() {
+        let createSelectMenuElement;
+        for (let name of responsibilityList) {
+          createSelectMenuElement += `<option ${
+            filterResponsibility == name ? "selected" : ""
+          }>${name}</option>`;
+        }
+        let createSelectMenu = `<select oninput="filterResponsible(this.value)" >
+          <option>Show All</option>
+          ${createSelectMenuElement}
+        </select>`;
+
+        return createSelectMenu;
+      }
 
       function filterResponsible(value) {
         if (value == "Show All") {
@@ -175,6 +182,9 @@
       }
 
       function addTask() {
+        if (inputValue != "" && responsibility != "") {
+          addNameToList();
+        }
         if (inputValue == "" || responsibility == "") {
           return;
         }
@@ -187,6 +197,14 @@
         inputValue = "";
         responsibility = "";
         updateView();
+      }
+
+      function addNameToList() {
+        if (responsibilityList.includes(responsibility)) {
+          return;
+        } else {
+          return responsibilityList.push(responsibility);
+        }
       }
     </script>
   </body>
