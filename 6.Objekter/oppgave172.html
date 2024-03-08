@@ -43,7 +43,7 @@
       let responsibility = "";
       let editResponsibility = "";
       let filterResponsibility;
-      let responsibilityList = ["Bob", "Per", "Jan"];
+      //let responsibilityList = ["Bob", "Per", "Jan"];
 
       let tasks = [
         {
@@ -129,11 +129,9 @@
       }
 
       //controller
-
-      // function that makes dropdown menu with the names in responsibilityList
       function createSelectMenu() {
         let createSelectMenuElement;
-        for (let name of responsibilityList) {
+        for (let name of getResponsibilityList()) {
           createSelectMenuElement += `<option ${
             filterResponsibility == name ? "selected" : ""
           }>${name}</option>`;
@@ -144,6 +142,16 @@
         </select>`;
 
         return createSelectMenu;
+      }
+
+      function getResponsibilityList() {
+        let names = [];
+        for (let task of tasks) {
+          if (!names.includes(task.responsible)) {
+            names.push(task.responsible);
+          }
+        }
+        return names;
       }
 
       function filterResponsible(value) {
@@ -157,17 +165,11 @@
 
       function changeState(index) {
         const task = tasks[index];
-        task.isDone ? (task.isDone = false) : (task.isDone = true);
+        task.isDone = !task.isDone;
         updateView();
       }
       function deleteTask(index) {
-        //incomplete
         const task = tasks[index];
-
-        responsibilityList.splice(
-          responsibilityList.indexOf(task.responsible),
-          1
-        );
         tasks.splice(index, 1);
         updateView();
       }
@@ -178,11 +180,6 @@
         editResponsibility = task.responsible;
         editInputValue = task.text;
 
-        responsibilityList.splice(
-          responsibilityList.indexOf(task.responsible),
-          1
-        );
-
         updateView();
       }
       function updateTask(index) {
@@ -191,15 +188,11 @@
         task.responsible = editResponsibility;
         task.editMode = false;
         editInputValue = "";
-        addNameToList(editResponsibility);
         editResponsibility = "";
         updateView();
       }
 
       function addTask() {
-        if (inputValue != "" && responsibility != "") {
-          addNameToList(responsibility);
-        }
         if (inputValue == "" || responsibility == "") {
           return;
         }
@@ -212,14 +205,6 @@
         inputValue = "";
         responsibility = "";
         updateView();
-      }
-
-      function addNameToList(responsibilityValue) {
-        if (responsibilityList.includes(responsibilityValue)) {
-          return;
-        } else {
-          return responsibilityList.push(responsibilityValue);
-        }
       }
     </script>
   </body>
