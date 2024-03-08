@@ -104,7 +104,9 @@
         let dateText = date.toISOString().slice(0, 10);
         const task = tasks[index];
         const checkbox = task.isDone ? 'checked="checked"' : "";
-        const showDate = task.isDone ? dateText : "";
+        const showDate = task.isDone
+          ? new Date(task.doneDate).toLocaleDateString()
+          : "";
         if (!task.editMode) {
           return /*HTML*/ ` <tr>
                     <td>${task.text}</td>
@@ -119,7 +121,7 @@
         }
         return /*HTML*/ ` <tr>
                     <td><input type="text" value="${task.text}" oninput="editInputValue = this.value"></td>
-                    <td>${showDate}</td>
+                    <td><input type="date" value="${task.doneDate}"/></td>
                     <td><input type="text" value="${task.responsible}" oninput="editResponsibility = this.value"></td>
                     <td><input type="checkbox" ${checkbox} onclick="changeState(${index})"></td>
                     <td>
