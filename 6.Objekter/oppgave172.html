@@ -173,25 +173,32 @@
       }
 
       function editTask(index) {
-        tasks[index].editMode = true;
-        editResponsibility = tasks[index].responsible;
-        editInputValue = tasks[index].text;
+        const task = tasks[index];
+        task.editMode = true;
+        editResponsibility = task.responsible;
+        editInputValue = task.text;
+
+        responsibilityList.splice(
+          responsibilityList.indexOf(task.responsible),
+          1
+        );
+
         updateView();
       }
       function updateTask(index) {
-        //incomplete
         let task = tasks[index];
         task.text = editInputValue;
         task.responsible = editResponsibility;
         task.editMode = false;
         editInputValue = "";
+        addNameToList(editResponsibility);
         editResponsibility = "";
         updateView();
       }
 
       function addTask() {
         if (inputValue != "" && responsibility != "") {
-          addNameToList();
+          addNameToList(responsibility);
         }
         if (inputValue == "" || responsibility == "") {
           return;
@@ -207,11 +214,11 @@
         updateView();
       }
 
-      function addNameToList() {
-        if (responsibilityList.includes(responsibility)) {
+      function addNameToList(responsibilityValue) {
+        if (responsibilityList.includes(responsibilityValue)) {
           return;
         } else {
-          return responsibilityList.push(responsibility);
+          return responsibilityList.push(responsibilityValue);
         }
       }
     </script>
